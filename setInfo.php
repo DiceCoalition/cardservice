@@ -218,4 +218,11 @@ class setInfo
         "toa" => "129-136" ,
         "ygo" => "107-110"
     );
+	
+	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor");
+	public $bacDC = array("jl", "wol", "wf", "sww");
+	public $bacTMNT = array("tmnt", "hhs");
+	public $bacDnD = array("bff", "fus", "toa");
+	public $bacModern = array("asm", "cw", "imw", "thor", "wol", "wf", "sww", "tmnt","hhs", "fus", "toa");
+    
 }
