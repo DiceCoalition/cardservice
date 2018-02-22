@@ -219,10 +219,23 @@ class setInfo
         "ygo" => "107-110"
     );
 	
+	public $Marvel = array("avx", "uxm", "aou", "asm", "cw", "drs","dp", "imw", "def", "smc", "gotg", "xfc", "thor");
+	public $DC = array("jl", "wol", "wf", "gaf","bat","sww");
+	public $TMNT = array("tmnt", "hhs");
+	public $DnD = array("bff", "fus", "toa");
+	public $modern = array("asm", "cw", "drs","dp", "imw", "def", "smc", "gotg", "xfc", "thor", "wol", "wf", "gaf", "bat", "sww", "tmnt", "hhs", "fus", "toa");
+	public $modernMarvel = array("asm", "cw", "drs","dp", "imw", "def", "smc", "gotg", "xfc", "thor");
+	public $modernDC = array("wol", "wf", "gaf","bat", "sww");
+	public $modernTMNT = array("tmnt", "hhs");
+	public $modernDnD = array("fus", "toa");
 	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor");
 	public $bacDC = array("jl", "wol", "wf", "sww");
 	public $bacTMNT = array("tmnt", "hhs");
 	public $bacDnD = array("bff", "fus", "toa");
 	public $bacModern = array("asm", "cw", "imw", "thor", "wol", "wf", "sww", "tmnt","hhs", "fus", "toa");
+	public $bacModernMarvel = array("asm", "cw", "imw", "thor");
+	public $bacModernDC = array("wol", "wf", "sww");
+	public $bacModernTMNT = array("tmnt", "hhs");
+	public $bacModernDnD = array("fus", "toa");
     
 }

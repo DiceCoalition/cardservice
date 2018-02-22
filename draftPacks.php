@@ -26,31 +26,64 @@ if(!$set){
 }
 //get BACs
 $cardBacPool = array();
-if($bacSet === 'all'){
-	foreach($setInfo->setBACs as $key=>$value)
-	{
-		$cardBacPool = array_merge($cardBacPool, getBacs($key, 2));
-	}
-}
-else{
+if( array_key_exists($bacSet, $setInfo->setBACs) ){
 	$cardBacPool = array_merge($cardBacPool, getBacs($bacSet, 2));
+} 	
+else{		
+	$sets = getBacSets($bacSet);		
+	foreach($sets as &$value){
+		$cardBacPool = array_merge($cardBacPool, getBacs($value, 2));
+	}	
 }
+
 
 //get SRs
 $cardSRPool = array();
-$cardSRPool = array_merge($cardSRPool, getSRs($set));
+if( array_key_exists($set, $setInfo->setSRs) ){
+	$cardSRPool = array_merge($cardSRPool, getSRs($set));
+}
+else{		
+	$sets = getSets($set);		
+	foreach($sets as &$value){
+		$cardSRPool = array_merge($cardSRPool, getSRs($value));
+	}	
+}
 
 //get Rares
 $cardRarePool = array();
-$cardRarePool = array_merge($cardRarePool, getRares($set));
+if( array_key_exists($set, $setInfo->setRares) ){
+	$cardRarePool = array_merge($cardRarePool, getRares($set));
+}
+else{		
+	$sets = getSets($set);		
+	foreach($sets as &$value){
+		$cardRarePool = array_merge($cardRarePool, getRares($value));
+	}	
+}
 
 //get UCs
 $cardUCPool = array();
-$cardUCPool = array_merge($cardUCPool, getUncommons($set));
+if( array_key_exists($set, $setInfo->setUncommons) ){
+	$cardUCPool = array_merge($cardUCPool, getUncommons($set));
+}
+else{		
+	$sets = getSets($set);		
+	foreach($sets as &$value){
+		$cardUCPool = array_merge($cardUCPool, getUncommons($value));
+	}	
+}
 
 //get Commons
 $cardCPool = array();
-$cardCPool = array_merge($cardCPool, getCommons($set, $includeStarter, 2));
+if( array_key_exists($set, $setInfo->setCommons) ){
+	$cardCPool = array_merge($cardCPool, getCommons($set, $includeStarter, 2));
+}
+else{		
+	$sets = getSets($set);		
+	foreach($sets as &$value){
+		$cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 2));
+	}	
+}
 
 shuffle($cardBacPool);
 shuffle($cardSRPool);
@@ -255,5 +288,63 @@ function getCommons($set, $includeStarter = "false", $instances = 2){
     }
 
     return $cardCPool;
+}
+
+function getBacSets($setsType){
+	global $setInfo;
+	if($setsType === 'all'){
+		$sets = array();
+		foreach($setInfo->setBACs as $key=>$value){
+			array_push($sets, $key);
+		}
+	}else if($setsType === 'allmarvel'){
+			$sets = $setInfo->bacMarvel;
+	} else if($setsType === 'alldc'){
+			$sets = $setInfo->bacDC;
+	} else if($setsType === 'alltmnt'){
+			$sets = $setInfo->bacTMNT;
+	} else if($setsType === 'alldnd'){
+			$sets = $setInfo->bacDnD;
+	} else if($setsType === 'allmodern'){
+			$sets = $setInfo->bacModern;
+	} else if($setsType === 'modernmarvel'){
+			$sets = $setInfo->bacModernMarvel;
+	} else if($setsType === 'moderndc'){
+		$sets = $setInfo->bacModernDC;
+	} else if($setsType === 'moderndnd'){
+		$sets = $setInfo->bacModernDnD;
+	} else if($setsType === 'moderntmnt'){
+		$sets = $setInfo->bacModernTMNT;
+	} 
+	return $sets;
+}
+
+function getSets($setsType){
+	global $setInfo;
+	if($setsType === 'all'){
+		$sets = array();
+		foreach($setInfo->setCommons as $key=>$value){
+			array_push($sets, $key);
+		}
+	}else if($setsType === 'allmarvel'){
+			$sets = $setInfo->Marvel;
+	} else if($setsType === 'alldc'){
+			$sets = $setInfo->DC;
+	} else if($setsType === 'alltmnt'){
+			$sets = $setInfo->TMNT;
+	} else if($setsType === 'alldnd'){
+			$sets = $setInfo->DnD;
+	} else if($setsType === 'allmodern'){
+			$sets = $setInfo->modern;
+	} else if($setsType === 'modernmarvel'){
+			$sets = $setInfo->modernMarvel;
+	} else if($setsType === 'moderndc'){
+		$sets = $setInfo->modernDC;
+	} else if($setsType === 'moderndnd'){
+		$sets = $setInfo->modernDnD;
+	} else if($setsType === 'moderntmnt'){
+		$sets = $setInfo->modernTMNT;
+	} 
+	return $sets;
 }
 
