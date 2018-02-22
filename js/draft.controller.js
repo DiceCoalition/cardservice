@@ -4,8 +4,8 @@ var app = angular.module('draftApp', []);
 app.controller('DraftController', function() {
     var vm = this;
 
-    vm.sets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf", "gaf", "dp","bat","gotg","xfc", "toa", "thor"];
-    vm.bacsets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf", "tmnt", "hhs", "imw", "sww", "toa", "thor"];
+    vm.sets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf", "gaf", "dp","bat","gotg","xfc", "toa", "thor", "tmnt", "hhs", "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.bacsets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf", "tmnt", "hhs", "imw", "sww", "toa", "thor","all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
     vm.starterSets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf"];
     vm.sizes= ["thumbnail","small","medium"];
     vm.selectedSet = "avx";
