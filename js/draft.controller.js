@@ -23,7 +23,7 @@ app.controller('DraftController', function() {
 		if(vm.size == "thumbnail") sl = "t";
 		else if(vm.size == "small") sl = "s";
         else if(vm.size == "medium") sl = "m";
-		vm.packs = 'http://dicecoalition.com/cardservice/draftPacks.php?set='+vm.selectedSet+'&res='+sl+'&bac='+vm.selectedBacSet+'&starter='+vm.starter+'&packs='+vm.packCount;
+		vm.packs = 'draftPacks.php?set='+vm.selectedSet+'&res='+sl+'&bac='+vm.selectedBacSet+'&starter='+vm.starter+'&packs='+vm.packCount;
 	}
 
     vm.showStarterCheck = function()

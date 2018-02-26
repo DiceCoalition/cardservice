@@ -218,15 +218,21 @@ for($c = 0; $c < $packCount; $c++) {
 }
 ksort($cardDict);
 ksort($bacDict);
-echo "<h3>Card Counts</h3>";
-foreach($bacDict as $key=>$value){
-    echo $key.": ".$value."<br>";
-}
+echo "<style>tr:nth-child(even) {background: #CCC} tr:nth-child(odd) {background: #FFF} </style>";
+echo "<h3>Dice Counts</h3>";
+echo "<table><tr><td>[CHARACTER]</td><td>[SINGLE DRAFT #]</td><td>[DOUBLE DRAFT #]</td></tr>";
+
 foreach($cardDict as $key=>$value){
-    echo $key.": ".$value."<br>";
+	$val2 = $value*2;
+    echo "<tr><td>".$key."</td><td>".$value."</td><td>".$val2."</td></tr>";
 }
-
-
+echo "</table>";
+echo "<h3>BAC Counts</h3>";
+echo "<table><tr><td>[CARD NAME]</td><td>[CARD #]</td></tr>";
+foreach($bacDict as $key=>$value){
+    echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
+}
+echo "</table>";
 function getBacs($set, $instances = 2){
     global $setInfo;
     $cardBacPool = array();

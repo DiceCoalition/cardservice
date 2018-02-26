@@ -65,7 +65,19 @@ class setInfo
     "toa" => "TOA" ,
     "tmnt" => "TMNT" ,
     "hhs" => "HHS" ,
-    "ygo" => "YGO"
+    "ygo" => "YGO",
+	
+	"m_op2017" => "m_op2017",
+	"m_op2016" => "m_op2016",
+	"m_op2015" => "m_op2015",
+	"m_op2014" => "m_op2014",
+	"dc_op2017" =>"dc_op2017",	
+	"dc_op2016" =>"dc_op2016",
+	"dc_op2015" =>"dc_op2015",
+	"dnd_op2016" => "dnd_op2016",
+	"dnd_op2015" => "dnd_op2015",
+	"dctw" => "dctw",
+	"avxop" => "avxop"
     );
 
     public $cardCount = array(

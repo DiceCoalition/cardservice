@@ -2,17 +2,20 @@
 <html ng-app="draftApp">
 <head>
     <title>Trubie's DM Draft Generator</title>
-    <script type="text/javascript" src="http://dicecoalition.com/cardservice/js/angular.min.js"></script>
-    <script type="text/javascript" src="http://dicecoalition.com/cardservice/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
-    <script type="text/javascript" src="http://dicecoalition.com/cardservice/js/draft.controller.js"></script>
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script type="text/javascript" src="js/draft.controller.js"></script>
 
     <link
-            href="http://dicecoalition.com/cardservice/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+            href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link
             href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css"
             th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}"
             rel="stylesheet" media="screen" />
-    <link href="http://dicecoalition.com/cardservice/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://dicecoalition.com/css/general.css">
@@ -34,7 +37,7 @@
 
 <body ng-controller="DraftController as draftCtrl" style="margin:0; padding:0; background-color:lightgrey;">
 <!--Navbar-->
-<div w3-include-html="http://dicecoalition.com/topbar.html"></div>
+<div w3-include-html="topbar.php"></div>
 <script>
     w3.includeHTML();
 </script>
