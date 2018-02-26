@@ -7,13 +7,22 @@
  */
 include("setInfo.php");
 include("Card.php");
+include("cardInfo.php");
 
 $setInfo = new setInfo();
+$cardInfo = new cardInfo();
 
 $set = strtolower($_GET['set']);
 $bacSet = strtolower($_GET['bac']);
 $res = strtolower($_GET['res']);
 $includeStarter = $_GET['starter'];
+$packCountString = $_GET['packs'];
+
+if(!$packCountString)
+    $packCount = 8;
+else
+    $packCount = intval($packCountString);
+
 if(!$bacSet)
     $bacSet = $set;
 if(!$res)
@@ -27,62 +36,62 @@ if(!$set){
 //get BACs
 $cardBacPool = array();
 if( array_key_exists($bacSet, $setInfo->setBACs) ){
-	$cardBacPool = array_merge($cardBacPool, getBacs($bacSet, 2));
-} 	
-else{		
-	$sets = getBacSets($bacSet);		
-	foreach($sets as &$value){
-		$cardBacPool = array_merge($cardBacPool, getBacs($value, 2));
-	}	
+    $cardBacPool = array_merge($cardBacPool, getBacs($bacSet, 2));
+}
+else{
+    $sets = getBacSets($bacSet);
+    foreach($sets as &$value){
+        $cardBacPool = array_merge($cardBacPool, getBacs($value, 2));
+    }
 }
 
 
 //get SRs
 $cardSRPool = array();
-if( array_key_exists($set, $setInfo->setSRs) ){
-	$cardSRPool = array_merge($cardSRPool, getSRs($set));
+if( array_key_exists($set, $setInfo->setSuperRares )){
+    $cardSRPool = array_merge($cardSRPool, getSRs($set));
 }
-else{		
-	$sets = getSets($set);		
-	foreach($sets as &$value){
-		$cardSRPool = array_merge($cardSRPool, getSRs($value));
-	}	
+else{
+    $sets = getSets($set);
+    foreach($sets as &$value){
+        $cardSRPool = array_merge($cardSRPool, getSRs($value));
+    }
 }
 
 //get Rares
 $cardRarePool = array();
 if( array_key_exists($set, $setInfo->setRares) ){
-	$cardRarePool = array_merge($cardRarePool, getRares($set));
+    $cardRarePool = array_merge($cardRarePool, getRares($set));
 }
-else{		
-	$sets = getSets($set);		
-	foreach($sets as &$value){
-		$cardRarePool = array_merge($cardRarePool, getRares($value));
-	}	
+else{
+    $sets = getSets($set);
+    foreach($sets as &$value){
+        $cardRarePool = array_merge($cardRarePool, getRares($value));
+    }
 }
 
 //get UCs
 $cardUCPool = array();
 if( array_key_exists($set, $setInfo->setUncommons) ){
-	$cardUCPool = array_merge($cardUCPool, getUncommons($set));
+    $cardUCPool = array_merge($cardUCPool, getUncommons($set));
 }
-else{		
-	$sets = getSets($set);		
-	foreach($sets as &$value){
-		$cardUCPool = array_merge($cardUCPool, getUncommons($value));
-	}	
+else{
+    $sets = getSets($set);
+    foreach($sets as &$value){
+        $cardUCPool = array_merge($cardUCPool, getUncommons($value));
+    }
 }
 
 //get Commons
 $cardCPool = array();
 if( array_key_exists($set, $setInfo->setCommons) ){
-	$cardCPool = array_merge($cardCPool, getCommons($set, $includeStarter, 2));
+    $cardCPool = array_merge($cardCPool, getCommons($set, $includeStarter, 2));
 }
-else{		
-	$sets = getSets($set);		
-	foreach($sets as &$value){
-		$cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 2));
-	}	
+else{
+    $sets = getSets($set);
+    foreach($sets as &$value){
+        $cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 2));
+    }
 }
 
 shuffle($cardBacPool);
@@ -91,124 +100,154 @@ shuffle($cardRarePool);
 shuffle($cardUCPool);
 shuffle($cardCPool);
 
+
+$ctDisplay = array();
 for($p = 0; $p < 8; $p++) {
     $cards = array();
     $ucCount = 4;
     $cCount = 6;
 
-    $size = count($cardBacPool);	
-	if($size>2) {
-		$cardNums = array();
-		for ($i = 0; $i < 2; $i++) {
-			$index = rand(0, $size - 1);
-			$card = $cardBacPool[$index];
-			while (in_array($card->Number, $cardNums)){
-				$index = rand(0, $size - 1);
-				$card = $cardBacPool[$index];
-			}
-			array_push($cardNums, $card->Number);
-			array_push($cards, $card);
-			array_splice($cardBacPool, $index, 1);
-			$size = $size-1;
-		}
-		unset($cardNums);
-	}
-	
-	$size = count($cardSRPool);
-	if($size > 0){
-		if($p <2) {
-			
-			$index = rand(0, $size - 1);
-			array_push($cards, $cardSRPool[$index]);
-			array_splice($cardSRPool, $index, 1);
-			$ucCount = 3;
-			$cCount = 7;
-		}
-		else
-		{
-			$size = count($cardRarePool);
-			$index = rand(0, $size - 1);
-			array_push($cards, $cardRarePool[$index]);
-			array_splice($cardRarePool, $index, 1);
-		}
-		$size = count($cardRarePool);
-		$index = rand(0, $size - 1);
-		array_push($cards, $cardRarePool[$index]);
-		array_splice($cardRarePool, $index, 1);
+    $size = count($cardBacPool);
+    if ($size > 2) {
+        $cardNums = array();
+        for ($i = 0; $i < 2; $i++) {
+            $index = rand(0, $size - 1);
+            $card = $cardBacPool[$index];
+            while (in_array($card->Number, $cardNums)) {
+                $index = rand(0, $size - 1);
+                $card = $cardBacPool[$index];
+            }
+            array_push($cardNums, $card->Number);
+            array_push($cards, $card);
+            array_splice($cardBacPool, $index, 1);
+            $size = $size - 1;
+        }
+        unset($cardNums);
+    }
+
+    $size = count($cardSRPool);
+    if ($size > 0) {
+        if ($p < 2) {
+
+            $index = rand(0, $size - 1);
+            array_push($cards, $cardSRPool[$index]);
+            array_splice($cardSRPool, $index, 1);
+            $ucCount = 3;
+            $cCount = 7;
+        } else {
+            $size = count($cardRarePool);
+            $index = rand(0, $size - 1);
+            array_push($cards, $cardRarePool[$index]);
+            array_splice($cardRarePool, $index, 1);
+        }
+        $size = count($cardRarePool);
+        $index = rand(0, $size - 1);
+        array_push($cards, $cardRarePool[$index]);
+        array_splice($cardRarePool, $index, 1);
 
         $size = count($cardUCPool);
         for ($i = 0; $i < $ucCount; $i++) {
             $index = rand(0, $size - 1);
             array_push($cards, $cardUCPool[$index]);
             array_splice($cardUCPool, $index, 1);
-            $size = $size-1;
+            $size = $size - 1;
         }
-	}
-	else {
-		$ucCount = 0;
-		$cCount = 12;
-	}
-    
-    $size = count($cardCPool);
-	if($size > 0)
-	{
-		$cardNums = array();
-		for ($i = 0; $i < $cCount; $i++) {
-			$index = rand(0, $size - 1);
-			$card = $cardCPool[$index];
-			while (in_array($card->Number, $cardNums)){
-				$index = rand(0, $size - 1);
-				$card = $cardCPool[$index];
-			}
-			array_push($cardNums, $card->Number);
-			array_push($cards, $card);
-			array_splice($cardCPool, $index, 1);
-			$size = $size-1;
-		}
+    } else {
+        $ucCount = 0;
+        $cCount = 12;
+    }
 
-		$packNum = $p+1;
-		echo "<h1>Pack ".$packNum."</h1><br>";
-		for ($i = 0; $i < count($cards); $i++) {
-			$card = $cards[$i];
-			$url = "http://dicecoalition.com/cardservice/Img.php?set=" . $card->Set . "&cardnum=" . $card->Number . "&res=".$res;
-			//$out = exec($url);
-			$color = "black";
-			if($card->Rarity == "sr") $color = "red";
-			else if($card->Rarity == "r") $color = "yellow";
-			else if($card->Rarity == "uc") $color = "green";
-			else if($card->Rarity == "c") $color = "grey";
-			$style = "style=\"border:3px solid ".$color.";\" ";
-			$img = file_get_contents($url);
-			$img = substr_replace($img, $style, 5, 0);
-			echo $img; //readfile($url)."<br>";
-		}
-	}
-	else{
-		echo "no commons found";
-	}
+    $size = count($cardCPool);
+    if ($size > 0) {
+        $cardNums = array();
+        for ($i = 0; $i < $cCount; $i++) {
+            $index = rand(0, $size - 1);
+            $card = $cardCPool[$index];
+            while (in_array($card->Number, $cardNums)) {
+                $index = rand(0, $size - 1);
+                $card = $cardCPool[$index];
+            }
+            array_push($cardNums, $card->Number);
+            array_push($cards, $card);
+            array_splice($cardCPool, $index, 1);
+            $size = $size - 1;
+        }
+    }
+    array_push($ctDisplay, $cards);
 }
 
-function getBacs($set, $instances = 2){	
-	global $setInfo;
-    $cardBacPool = array();	
+shuffle($ctDisplay);
+
+$cardDict = array();
+$bacDict = array();
+for($c = 0; $c < $packCount; $c++) {
+    $packNum = $c+1;
+    $cards = $ctDisplay[$c];
+    echo "<h1>Pack ".$packNum."</h1><br>";
+    for ($i = 0; $i < count($cards); $i++) {
+        $card = $cards[$i];
+        $url = "http://dicecoalition.com/cardservice/Img.php?set=" . $card->Set . "&cardnum=" . $card->Number . "&res=".$res;
+        //$out = exec($url);
+        $color = "black";
+        if($card->Rarity == "sr") $color = "red";
+        else if($card->Rarity == "r") $color = "yellow";
+        else if($card->Rarity == "uc") $color = "green";
+        else if($card->Rarity == "c") $color = "grey";
+        $style = "style=\"border:3px solid ".$color.";\" ";
+        $img = file_get_contents($url);
+        $img = substr_replace($img, $style, 5, 0);
+        echo $img; //readfile($url)."<br>";
+        //minus 1 because we are retrievning from 0 based arrays
+        $cardInt = intval($card->Number)-1;
+        $cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
+        if($card->Rarity != "bac") {
+            if (isset($cardDict[$cardName])) {
+                $cardDict[$cardName] += 1;
+            } else {
+                $cardDict[$cardName] = 1;
+            }
+        }
+        else{
+            if (isset($bacDict[$cardName])) {
+                $bacDict[$cardName] += 1;
+            } else {
+                $bacDict[$cardName] = 1;
+            }
+        }
+    }
+}
+ksort($cardDict);
+ksort($bacDict);
+echo "<h3>Card Counts</h3>";
+foreach($bacDict as $key=>$value){
+    echo $key.": ".$value."<br>";
+}
+foreach($cardDict as $key=>$value){
+    echo $key.": ".$value."<br>";
+}
+
+
+function getBacs($set, $instances = 2){
+    global $setInfo;
+    $cardBacPool = array();
     if(array_key_exists($set, $setInfo->setBACs)) {
         $cardBacRange = explode("-", $setInfo->setBACs[$set]);
         $cardNumRange = range(intval($cardBacRange[0]), intval($cardBacRange[1]));
         foreach($cardNumRange as &$value)
-        {			
-            $card = new Card($set, $value, "bac");		
+        {
+            $card = new Card($set, $value, "bac");
             array_push($cardBacPool, $card);
         }
         for($i =1; $i < $instances; $i++) {
             $cardBacPool = array_merge($cardBacPool, $cardBacPool);
         }
-    }	
+    }
     return $cardBacPool;
 }
 
 function getSRs($set, $instances = 1){
-	global $setInfo;
-    $cardSRPool = array();	
+    global $setInfo;
+    $cardSRPool = array();
     if(array_key_exists($set, $setInfo->setSuperRares)) {
         $cardSRRange = explode("-", $setInfo->setSuperRares[$set]);
         $cardNumRange= range(intval($cardSRRange[0]), intval($cardSRRange[1]));
@@ -224,7 +263,7 @@ function getSRs($set, $instances = 1){
 }
 
 function getRares($set, $instances = 1){
-	global $setInfo;
+    global $setInfo;
     $cardRarePool = array();
     if(array_key_exists($set, $setInfo->setRares)) {
         $cardRareRange = explode("-", $setInfo->setRares[$set]);
@@ -241,7 +280,7 @@ function getRares($set, $instances = 1){
 }
 
 function getUncommons($set, $instances = 1){
-	global $setInfo;
+    global $setInfo;
     $cardUCPool = array();
     if(array_key_exists($set, $setInfo->setUncommons)) {
         $cardUCRange = explode("-", $setInfo->setUncommons[$set]);
@@ -258,7 +297,7 @@ function getUncommons($set, $instances = 1){
 }
 
 function getCommons($set, $includeStarter = "false", $instances = 2){
-	global $setInfo;
+    global $setInfo;
     $cardCPool = array();
     $commons = $setInfo->setCommons[$set];
     if(strpos($commons, ',') !== false)
@@ -291,60 +330,60 @@ function getCommons($set, $includeStarter = "false", $instances = 2){
 }
 
 function getBacSets($setsType){
-	global $setInfo;
-	if($setsType === 'all'){
-		$sets = array();
-		foreach($setInfo->setBACs as $key=>$value){
-			array_push($sets, $key);
-		}
-	}else if($setsType === 'allmarvel'){
-			$sets = $setInfo->bacMarvel;
-	} else if($setsType === 'alldc'){
-			$sets = $setInfo->bacDC;
-	} else if($setsType === 'alltmnt'){
-			$sets = $setInfo->bacTMNT;
-	} else if($setsType === 'alldnd'){
-			$sets = $setInfo->bacDnD;
-	} else if($setsType === 'allmodern'){
-			$sets = $setInfo->bacModern;
-	} else if($setsType === 'modernmarvel'){
-			$sets = $setInfo->bacModernMarvel;
-	} else if($setsType === 'moderndc'){
-		$sets = $setInfo->bacModernDC;
-	} else if($setsType === 'moderndnd'){
-		$sets = $setInfo->bacModernDnD;
-	} else if($setsType === 'moderntmnt'){
-		$sets = $setInfo->bacModernTMNT;
-	} 
-	return $sets;
+    global $setInfo;
+    if($setsType === 'all'){
+        $sets = array();
+        foreach($setInfo->setBACs as $key=>$value){
+            array_push($sets, $key);
+        }
+    }else if($setsType === 'allmarvel'){
+        $sets = $setInfo->bacMarvel;
+    } else if($setsType === 'alldc'){
+        $sets = $setInfo->bacDC;
+    } else if($setsType === 'alltmnt'){
+        $sets = $setInfo->bacTMNT;
+    } else if($setsType === 'alldnd'){
+        $sets = $setInfo->bacDnD;
+    } else if($setsType === 'allmodern'){
+        $sets = $setInfo->bacModern;
+    } else if($setsType === 'modernmarvel'){
+        $sets = $setInfo->bacModernMarvel;
+    } else if($setsType === 'moderndc'){
+        $sets = $setInfo->bacModernDC;
+    } else if($setsType === 'moderndnd'){
+        $sets = $setInfo->bacModernDnD;
+    } else if($setsType === 'moderntmnt'){
+        $sets = $setInfo->bacModernTMNT;
+    }
+    return $sets;
 }
 
 function getSets($setsType){
-	global $setInfo;
-	if($setsType === 'all'){
-		$sets = array();
-		foreach($setInfo->setCommons as $key=>$value){
-			array_push($sets, $key);
-		}
-	}else if($setsType === 'allmarvel'){
-			$sets = $setInfo->Marvel;
-	} else if($setsType === 'alldc'){
-			$sets = $setInfo->DC;
-	} else if($setsType === 'alltmnt'){
-			$sets = $setInfo->TMNT;
-	} else if($setsType === 'alldnd'){
-			$sets = $setInfo->DnD;
-	} else if($setsType === 'allmodern'){
-			$sets = $setInfo->modern;
-	} else if($setsType === 'modernmarvel'){
-			$sets = $setInfo->modernMarvel;
-	} else if($setsType === 'moderndc'){
-		$sets = $setInfo->modernDC;
-	} else if($setsType === 'moderndnd'){
-		$sets = $setInfo->modernDnD;
-	} else if($setsType === 'moderntmnt'){
-		$sets = $setInfo->modernTMNT;
-	} 
-	return $sets;
+    global $setInfo;
+    if($setsType === 'all'){
+        $sets = array();
+        foreach($setInfo->setCommons as $key=>$value){
+            array_push($sets, $key);
+        }
+    }else if($setsType === 'allmarvel'){
+        $sets = $setInfo->Marvel;
+    } else if($setsType === 'alldc'){
+        $sets = $setInfo->DC;
+    } else if($setsType === 'alltmnt'){
+        $sets = $setInfo->TMNT;
+    } else if($setsType === 'alldnd'){
+        $sets = $setInfo->DnD;
+    } else if($setsType === 'allmodern'){
+        $sets = $setInfo->modern;
+    } else if($setsType === 'modernmarvel'){
+        $sets = $setInfo->modernMarvel;
+    } else if($setsType === 'moderndc'){
+        $sets = $setInfo->modernDC;
+    } else if($setsType === 'moderndnd'){
+        $sets = $setInfo->modernDnD;
+    } else if($setsType === 'moderntmnt'){
+        $sets = $setInfo->modernTMNT;
+    }
+    return $sets;
 }
 

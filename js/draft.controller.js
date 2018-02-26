@@ -14,6 +14,7 @@ app.controller('DraftController', function() {
     vm.starter = false;
 	vm.packs="";
 	vm.loading = false;
+	vm.packCount = "8";
 
     vm.load = function()
 	{
@@ -22,7 +23,7 @@ app.controller('DraftController', function() {
 		if(vm.size == "thumbnail") sl = "t";
 		else if(vm.size == "small") sl = "s";
         else if(vm.size == "medium") sl = "m";
-		vm.packs = 'http://dicecoalition.com/cardservice/draftPacks.php?set='+vm.selectedSet+'&res='+sl+'&bac='+vm.selectedBacSet+'&starter='+vm.starter;
+		vm.packs = 'http://dicecoalition.com/cardservice/draftPacks.php?set='+vm.selectedSet+'&res='+sl+'&bac='+vm.selectedBacSet+'&starter='+vm.starter+'&packs='+vm.packCount;
 	}
 
     vm.showStarterCheck = function()

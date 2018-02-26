@@ -59,10 +59,23 @@
                 <select ng-model="draftCtrl.selectedBacSet">
                     <option ng-repeat="y in draftCtrl.bacsets">{{y}}</option>
                 </select>
+                <br>
+                Pack Count:
+                <select ng-model="draftCtrl.packCount">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
                 Image Size:
                 <select ng-model="draftCtrl.size">
                     <option ng-repeat="z in draftCtrl.sizes">{{z}}</option>
                 </select>
+
                 <br>
                 <label ng-show="draftCtrl.showStarterCheck()">Include Starter:
                     <input type="checkbox" ng-model="draftCtrl.starter">
