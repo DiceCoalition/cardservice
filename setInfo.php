@@ -71,13 +71,19 @@ class setInfo
 	"m_op2016" => "m_op2016",
 	"m_op2015" => "m_op2015",
 	"m_op2014" => "m_op2014",
+	"uxmop" => "uxmop",
 	"dc_op2017" =>"dc_op2017",	
 	"dc_op2016" =>"dc_op2016",
 	"dc_op2015" =>"dc_op2015",
 	"dnd_op2016" => "dnd_op2016",
 	"dnd_op2015" => "dnd_op2015",
 	"dctw" => "dctw",
-	"avxop" => "avxop"
+	"avxop" => "avxop",
+	"dnd_wkop2016" => "dnd_wkop2016",
+	"m_wkop2016" => "m_wkop2016",
+	"m_wkop2015" => "m_wkop2015",
+	"dc_wkop2016" => "dc_wkop2016",
+	"dc_wkop2015" => "dc_wkop2015"
     );
 
     public $cardCount = array(
