@@ -5,6 +5,7 @@
  * Date: 2/16/2018
  * Time: 5:40 PM
  */
+
 include("setInfo.php");
 include("Card.php");
 include("cardInfo.php");
@@ -350,7 +351,7 @@ function getBacSets($setsType){
         $sets = $setInfo->bacTMNT;
     } else if($setsType === 'alldnd'){
         $sets = $setInfo->bacDnD;
-    } else if($setsType === 'allmodern'){
+    } else if($setsType === 'modern'){
         $sets = $setInfo->bacModern;
     } else if($setsType === 'modernmarvel'){
         $sets = $setInfo->bacModernMarvel;
@@ -379,7 +380,7 @@ function getSets($setsType){
         $sets = $setInfo->TMNT;
     } else if($setsType === 'alldnd'){
         $sets = $setInfo->DnD;
-    } else if($setsType === 'allmodern'){
+    } else if($setsType === 'modern'){
         $sets = $setInfo->modern;
     } else if($setsType === 'modernmarvel'){
         $sets = $setInfo->modernMarvel;

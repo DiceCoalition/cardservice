@@ -615,7 +615,7 @@ class cardInfo
     'Truce',
 );
 
-    public $dc_op2017 =  array(
+    public $dc2017 =  array(
     'Batman™',
     'Robin™',
     'The Joker™',
@@ -625,8 +625,8 @@ class cardInfo
     'Poison Ivy™',
 );
 
-    public $m_op2017_dice =  array( 'dp', 'dp', 'dp', 'dp','dp','dp','aou','aou');
-    public $m_op2017 =  array(
+    public $m2017_dice =  array( 'dp', 'dp', 'dp', 'dp','dp','dp','aou','aou');
+    public $m2017 =  array(
     // DP dice
     'Deadpool',
     'Lady Deadpool',
@@ -1374,13 +1374,13 @@ class cardInfo
     'Tactical Cover',
     'Turtle Van',
 );
-    public $wkop_2016_dd =  array(
+    public $wko16dd =  array(
     'Strahd'
 );
-    public $wkop_2016_m =  array(
+    public $wko16m =  array(
     'Melinda May'
 );
-    public $wkop_2016_dc =  array(
+    public $wko16dc =  array(
     'Terry McGinnis'
 );
 
@@ -1675,8 +1675,8 @@ class cardInfo
     'Robe of the Archmagi',
     'Belaphoss',
 );
-    public $m_op2016_dice =  array( 'asm', 'asm', 'asm', 'avx', '', 'cw', 'cw', 'cw', 'cw', 'cw', 'cw' );
-    public $m_op2016 =  array(
+    public $m2016_dice =  array( 'asm', 'asm', 'asm', 'avx', '', 'cw', 'cw', 'cw', 'cw', 'cw', 'cw' );
+    public $m2016 =  array(
     //ASM dice
     'Gwen Stacy',
     'Mary Jane',
@@ -1694,15 +1694,15 @@ class cardInfo
     'Ant-Man',
     'Captain America',
 );
-    public $dd_op2016 =  array(
+    public $d2016 =  array(
     'Mummy',
     'Gelatinous Cube',
     'Half-Dragon',
     'Skeleton',
 );
 
-    public $dc_op2016_dice =  array( 'jl', 'wol', 'wf', 'jl', 'jl', 'wf', '', 'wf', 'wf', '', 'gaf', 'gaf', 'gaf', 'gaf' );
-    public $dc_op2016 =  array(
+    public $dc2016_dice =  array( 'jl', 'wol', 'wf', 'jl', 'jl', 'wf', '', 'wf', 'wf', '', 'gaf', 'gaf', 'gaf', 'gaf' );
+    public $dc2016 =  array(
     // JL dice (not WF)
     'Lex Luthor',
     // WoL dice (not WF)
@@ -1877,14 +1877,14 @@ class cardInfo
     'Morbius@Z',
     'Venom@Z',
 );
-    public $aou_op =  array(
+    public $m2015 =  array(
     'Ultron',
     'Nova',
     'Thanos',
     'Iron Fist',
 );
 
-    public $wol_op =  array(
+    public $wolop =  array(
     'Robin',
     'Starfire',
     'Batmobile',

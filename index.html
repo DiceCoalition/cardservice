@@ -7,6 +7,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script type="text/javascript" src="js/angular-bootstrap-checkbox.js"></script>
     <script type="text/javascript" src="js/draft.controller.js"></script>
 
     <link
@@ -30,6 +31,50 @@
         .mySlides {display:none}
         .w3-left, .w3-right, .w3-badge {cursor:pointer}
         .w3-badge {height:13px;width:13px;padding:0}
+
+        .marvel {
+            border-color: red;
+            border-width: 2px;
+            border-style: groove;
+        }
+
+        .dc {
+            border-color: blue;
+            border-width: 2px;
+            border-style: groove;
+         }
+
+        .tmnt {
+            border-color: green;
+            border-width: 2px;
+            border-style: groove;
+        }
+
+        .dnd  {
+            border-color: yellow;
+            border-width: 2px;
+            border-style: groove;
+        }
+
+        .other  {
+            border-color: white;
+            border-width: 2px;
+            border-style: groove;
+        }
+/*
+        .checkboxes label {
+            display: block;
+            float: left;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+        .checkboxes input {
+            vertical-align: middle;
+        }
+        .checkboxes label span {
+            vertical-align: middle;
+        }
+        */
     </style>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
@@ -41,57 +86,97 @@
 <script>
     w3.includeHTML();
 </script>
-<div class="row" style="padding-top:2cm">
-    <center>
-
+<div class="container">
+<div class="row" style="padding-top:1cm; text-align:center">
         <h2>
             <img src="must.png">
             Trubie's Draft Pack Generator
             <img src="must.png">
         </h2>
-    </center>
 </div>
 <div class="row">
-    <div>
-        <center>
-            <div style="font-size:180%;">Set:
-                <select ng-model="draftCtrl.selectedSet">
-                    <option ng-repeat="x in draftCtrl.sets">{{x}}</option>
-                </select>
-                BACs:
-                <select ng-model="draftCtrl.selectedBacSet">
-                    <option ng-repeat="y in draftCtrl.bacsets">{{y}}</option>
-                </select>
-                <br>
-                Pack Count:
-                <select ng-model="draftCtrl.packCount">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
-                Image Size:
-                <select ng-model="draftCtrl.size">
-                    <option ng-repeat="z in draftCtrl.sizes">{{z}}</option>
-                </select>
-
-                <br>
-                <label ng-show="draftCtrl.showStarterCheck()">Include Starter:
-                    <input type="checkbox" ng-model="draftCtrl.starter">
-                </label>
+            <div class="col-sm-6" style="border-color: white; border-width: 2px;border-style: double">
+                <div class="row" style="background: white">
+                    <label>Sets:</label>
+                </div>
+                <div class="row">
+                    <!-- ng-class="draftCtrl.getClass(set)" -->
+                    <div  class="col-md-3 form-check form-check-inline" ng-repeat="set in draftCtrl.sets">
+                            <input class="form-check-input"
+                                   id="cb{{set}}"
+                                    type="checkbox"
+                                    name="selectedSets[]"
+                                    value="{{set}}"
+                                    ng-checked="draftCtrl.selection.indexOf(set) > -1"
+                                    ng-click="draftCtrl.toggleSelection(set)"
+                            >
+                            <label class="form-check-label" for="cb{{set}}">{{set}}</label>
+                    </div>
+                </div>
+                <div class="row" style="text-align: right; border-width: 4px">
+                    <button type="button" ng-click="draftCtrl.select('all')">All</button>
+                    <button type="button" ng-click="draftCtrl.select('none')">None</button>
+                    <button type="button" ng-click="draftCtrl.select('modern')">Modern</button>
+                </div>
             </div>
-            <div style="padding-top:10px"><button type="button" ng-click="draftCtrl.load()">Get Packs</button></div>
-        </center>
+
+            <div class="col-sm-6" style="border-color: white; border-width: 2px; border-style: double">
+                <div class="row" style="background: white">
+                    <label>BACs:</label>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 form-check form-check-inline" ng-repeat="bacset in draftCtrl.bacsets">
+                        <input class="form-check-input"
+                               id="cbb{{bacset}}"
+                               type="checkbox"
+                               name="selectedBacSets[]"
+                               value="{{bacset}}"
+                               ng-checked="draftCtrl.bacselection.indexOf(bacset) > -1"
+                               ng-click="draftCtrl.toggleBacSelection(bacset)"
+                        >
+                        <label class="form-check-label" for="cbb{{bacset}}">{{bacset}}</label>
+                    </div>
+                </div>
+                <div class="row" style="text-align: right; border-width: 4px">
+                    <button type="button" ng-click="draftCtrl.bacselect('all')">All</button>
+                    <button type="button" ng-click="draftCtrl.bacselect('none')">None</button>
+                    <button type="button" ng-click="draftCtrl.bacselect('modern')">Modern</button>
+                </div>
+            </div>
+
     </div>
+
+<div class="row" style="text-align: center">
+    <div>
+        Pack Count:
+        <select ng-model="draftCtrl.packCount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+        Image Size:
+        <select ng-model="draftCtrl.size">
+            <option ng-repeat="z in draftCtrl.sizes">{{z}}</option>
+        </select>
+
+        <br>
+        <label ng-show="draftCtrl.showStarterCheck()">Include Starter:
+            <input type="checkbox" ng-model="draftCtrl.starter">
+        </label>
+    </div>
+    <div style="padding-top:10px"><button type="button" ng-click="draftCtrl.load()">Get Packs</button></div>
+
 </div>
 <div id="packDiv" ng-include="draftCtrl.packs"></div>
 
 <div style="text-align:center; padding: 3px; font-size: small;">
     Draft Pack Generator by Trubie Turner. The images on this website are copyrighted by NECA/WizKids LLC. This website is not affiliated with nor endorsed by NECA/WizKids LLC.
+</div>
 </div>
 </body>
 </html>
