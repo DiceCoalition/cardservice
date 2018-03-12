@@ -7,13 +7,26 @@
  */
 include("setInfo.php");
 
-function Redirect($url, $permanent = false){
-    if (headers_sent() === false)
+function LoadJpeg($imgname)
+{
+    /* Attempt to open */
+    $im = @imagecreatefromjpeg($imgname);
+
+    /* See if it failed */
+    if(!$im)
     {
-        header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
+        /* Create a black image */
+        $im  = imagecreatetruecolor(150, 30);
+        $bgc = imagecolorallocate($im, 255, 255, 255);
+        $tc  = imagecolorallocate($im, 0, 0, 0);
+
+        imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
+
+        /* Output an error message */
+        imagestring($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
     }
 
-    exit();
+    return $im;
 }
 
 $setInfo = new setInfo();
@@ -47,11 +60,17 @@ switch($res){
         break;
 }
 
-
-
 $imageUrl = "http://www.dicecoalition.com/cardservice/Cards/".$setName."/".$cardNumber.$resolutionString.".jpg";
-Redirect($imageUrl);
 
-foreach (array_keys($GLOBALS) as $k) unset($$k);
-unset($k);
+$img = LoadJpeg($imageUrl);
+//$img = file_get_contents($imageUrl);
+if($img === false){
+  echo "file load failed";	
+} else{
+header('Content-Type: image/jpeg');
+imagejpeg($img);
+imagedestroy($img);
 
+    foreach (array_keys($GLOBALS) as $k) unset($$k);
+    unset($k);
+}
