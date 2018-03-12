@@ -53,3 +53,6 @@ if($set && $cardNumber){
         echo "Invalid set name: ".$set.". Please check tb.dicecoalition.com for proper set abbreviations.";
     }
 }
+
+foreach (array_keys($GLOBALS) as $k) unset($$k);
+unset($k);

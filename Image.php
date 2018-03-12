@@ -70,4 +70,7 @@ if($img === false){
 header('Content-Type: image/jpeg');
 imagejpeg($img);
 imagedestroy($img);
+
+    foreach (array_keys($GLOBALS) as $k) unset($$k);
+    unset($k);
 }

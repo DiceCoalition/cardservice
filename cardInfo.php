@@ -345,7 +345,6 @@ class cardInfo
     'Beast',
     'Bishop',
     'Blink',
-    'Jean Grey',
     'Blob',
     'Boom Boom',
     'Colossus',
@@ -355,6 +354,7 @@ class cardInfo
     'Emma Frost',
     'Havok',
     'Iceman',
+    'Jean Grey',
     'Jubilee',
     'Juggernaut',
     'Kitty Pryde',
@@ -625,7 +625,7 @@ class cardInfo
     'Poison Ivy™',
 );
 
-    public $m2017_dice =  array( 'dp', 'dp', 'dp', 'dp','dp','dp','aou','aou');
+    public $m2017_dice =  array( 'dp', 'dp', 'dp', 'dp','dp','dp','xfc','aou','','avx','xfc');
     public $m2017 =  array(
     // DP dice
     'Deadpool',
@@ -634,8 +634,12 @@ class cardInfo
     'Wolverine',
     'Lockjaw',
     'Medusa',
+    'Morph',
+    'Sabretooth',
     'Groot',
-    'Rocket Raccoon',
+    'Power Bolt',
+    'Mystique',
+    'Magneto',
 );
 
     public $def =  array(

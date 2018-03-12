@@ -234,6 +234,10 @@ foreach($bacDict as $key=>$value){
     echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
 }
 echo "</table>";
+
+foreach (array_keys($GLOBALS) as $k) unset($$k);
+unset($k);
+
 function getBacs($set, $instances = 2){
     global $setInfo;
     $cardBacPool = array();

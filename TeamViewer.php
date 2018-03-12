@@ -49,7 +49,7 @@ if($cards) {
         if($name)
             echo "<label class='teamLabel'>".$name."</label></td></tr><tr><td>";
         //echo "<ul id=\"cards\" style=\"list-style: none;\">";
-        echo "<table><tr><td style='vertical-align: top;'>";
+        echo "<table class='teamtable'><tr><td style='vertical-align: top;'>";
         echo "<table id=\"cards" . $unique . "\" ><tr class='cardLabel'><td>Card</td><td>Dice</td></tr>";
         //$cardsString = substr($team, $cardIndex);
         $index = 1;
@@ -91,7 +91,7 @@ if($cards) {
         echo "<a href=\"http://tb.dicecoalition.com/?view&cards=".$cards."\" target=\"_new\"><img src='http://dicecoalition.com/cardservice/images/tb-small.png' title='View In Team Builder'></a><br>";
         //echo "</div>";
         echo "</td><td>";
-        echo "<div class='box".$unique."' style='height:350px'><img src=\"".$firstCard."\"/ class='regImage img-responsive pluginImg'></div></div></div><br>";
+        echo "<div class='box".$unique."' style='height:350px;padding-left:20px'><img src=\"".$firstCard."\"/ class='regImage img-responsive pluginImg'></div></div></div><br>";
         echo "</td></tr></table></div>";
     }
     else if($format === 'images'){
@@ -101,7 +101,7 @@ if($cards) {
         echo "<div class='teamview'>";
         if($name)
             echo "<label class='teamLabel'>".$name."</label>";
-        echo "<table><tr>";
+        echo "<table style='text-align: center'><tr>";
         $cardCount = count($cardsArray);
         foreach ($cardsArray as $card) {
             $dice = substr($card, 0, 1);
@@ -145,9 +145,11 @@ if($cards) {
     }
 
     echo "<style>.teamview { background: white;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}</style>";
+    echo "<style>.teamtable{ margin-left: auto; margin-right: auto; max-width: 1000px; float: none;}</style>";
     echo "<style>.teamLabel { font-weight:700;font-style:italic;font-size:1.4rem;margin:0;padding:0;text-align: left}</style>";
     echo "<style>.cardLabel { font-weight:700;font-size:1.4rem;margin:0;padding:0}</style>";
     //echo "<link href=\"http://dicecoalition.com/cardservice/css/lightbox.css\" rel=\"stylesheet\">";
     echo "<script src=\"http://dicecoalition.com/cardservice/js/lightbox.js\"></script>";
-
 }
+foreach (array_keys($GLOBALS) as $k) unset($$k);
+unset($k);
