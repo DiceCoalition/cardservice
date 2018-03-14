@@ -19,6 +19,7 @@ $res = strtolower($_GET['res']);
 $includeStarter = $_GET['starter'];
 $packCountString = $_GET['packs'];
 
+
 if(!$packCountString)
     $packCount = 8;
 else
@@ -36,64 +37,40 @@ if(!$set){
 }
 //get BACs
 $cardBacPool = array();
-if( array_key_exists($bacSet, $setInfo->setBACs) ){
-    $cardBacPool = array_merge($cardBacPool, getBacs($bacSet, 2));
+$sets = getBacSets($bacSet);
+foreach($sets as &$value){
+    $cardBacPool = array_merge($cardBacPool, getBacs($value, 2));
 }
-else{
-    $sets = getBacSets($bacSet);
-    foreach($sets as &$value){
-        $cardBacPool = array_merge($cardBacPool, getBacs($value, 2));
-    }
-}
-
 
 //get SRs
 $cardSRPool = array();
-if( array_key_exists($set, $setInfo->setSuperRares )){
-    $cardSRPool = array_merge($cardSRPool, getSRs($set));
-}
-else{
-    $sets = getSets($set);
-    foreach($sets as &$value){
-        $cardSRPool = array_merge($cardSRPool, getSRs($value));
-    }
+$sets = getSets($set);
+foreach($sets as &$value){
+    $cardSRPool = array_merge($cardSRPool, getSRs($value));
 }
 
 //get Rares
 $cardRarePool = array();
-if( array_key_exists($set, $setInfo->setRares) ){
-    $cardRarePool = array_merge($cardRarePool, getRares($set));
-}
-else{
-    $sets = getSets($set);
-    foreach($sets as &$value){
-        $cardRarePool = array_merge($cardRarePool, getRares($value));
-    }
+$sets = getSets($set);
+foreach($sets as &$value){
+    $cardRarePool = array_merge($cardRarePool, getRares($value));
 }
 
 //get UCs
 $cardUCPool = array();
-if( array_key_exists($set, $setInfo->setUncommons) ){
-    $cardUCPool = array_merge($cardUCPool, getUncommons($set));
+$sets = getSets($set);
+foreach($sets as &$value){
+    $cardUCPool = array_merge($cardUCPool, getUncommons($value));
 }
-else{
-    $sets = getSets($set);
-    foreach($sets as &$value){
-        $cardUCPool = array_merge($cardUCPool, getUncommons($value));
-    }
-}
+
 
 //get Commons
 $cardCPool = array();
-if( array_key_exists($set, $setInfo->setCommons) ){
-    $cardCPool = array_merge($cardCPool, getCommons($set, $includeStarter, 2));
+$sets = getSets($set);
+foreach($sets as &$value){
+    $cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 2));
 }
-else{
-    $sets = getSets($set);
-    foreach($sets as &$value){
-        $cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 2));
-    }
-}
+
 
 shuffle($cardBacPool);
 shuffle($cardSRPool);
@@ -224,7 +201,7 @@ echo "<h3>Dice Counts</h3>";
 echo "<table><tr><td>[CHARACTER]</td><td>[SINGLE DRAFT #]</td><td>[DOUBLE DRAFT #]</td></tr>";
 
 foreach($cardDict as $key=>$value){
-	$val2 = $value*2;
+    $val2 = $value*2;
     echo "<tr><td>".$key."</td><td>".$value."</td><td>".$val2."</td></tr>";
 }
 echo "</table>";
@@ -241,7 +218,7 @@ unset($k);
 function getBacs($set, $instances = 2){
     global $setInfo;
     $cardBacPool = array();
-    if(array_key_exists($set, $setInfo->setBACs)) {
+    if(array_key_exists($set, $setInfo->setBACs)){
         $cardBacRange = explode("-", $setInfo->setBACs[$set]);
         $cardNumRange = range(intval($cardBacRange[0]), intval($cardBacRange[1]));
         foreach($cardNumRange as &$value)
@@ -293,6 +270,7 @@ function getRares($set, $instances = 1){
 function getUncommons($set, $instances = 1){
     global $setInfo;
     $cardUCPool = array();
+
     if(array_key_exists($set, $setInfo->setUncommons)) {
         $cardUCRange = explode("-", $setInfo->setUncommons[$set]);
         $cardNumRange= range(intval($cardUCRange[0]), intval($cardUCRange[1]));
@@ -342,7 +320,13 @@ function getCommons($set, $includeStarter = "false", $instances = 2){
 
 function getBacSets($setsType){
     global $setInfo;
-    if($setsType === 'all'){
+    if(strpos($setsType, ',') !== false){
+        $sets = array();
+        $setList = explode(',', $setsType);
+        foreach($setList as $setname){
+            array_push($sets, $setname);
+        }
+    } else if($setsType === 'all'){
         $sets = array();
         foreach($setInfo->setBACs as $key=>$value){
             array_push($sets, $key);
@@ -365,13 +349,22 @@ function getBacSets($setsType){
         $sets = $setInfo->bacModernDnD;
     } else if($setsType === 'moderntmnt'){
         $sets = $setInfo->bacModernTMNT;
+    } else{
+        $sets = array();
+        array_push($sets, $setsType);
     }
     return $sets;
 }
 
 function getSets($setsType){
     global $setInfo;
-    if($setsType === 'all'){
+    if(strpos($setsType, ',') !== false){
+        $sets = array();
+        $setList = explode(',', $setsType);
+        foreach($setList as $setname){
+            array_push($sets, $setname);
+        }
+    } else if($setsType === 'all'){
         $sets = array();
         foreach($setInfo->setCommons as $key=>$value){
             array_push($sets, $key);
@@ -394,6 +387,9 @@ function getSets($setsType){
         $sets = $setInfo->modernDnD;
     } else if($setsType === 'moderntmnt'){
         $sets = $setInfo->modernTMNT;
+    } else{
+        $sets = array();
+        array_push($sets, $setsType);
     }
     return $sets;
 }

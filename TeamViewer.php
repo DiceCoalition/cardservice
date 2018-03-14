@@ -46,8 +46,11 @@ if($cards) {
     if($format === "hybrid" or !$format) {
         //echo "<div class='container teamview'><div class='row'><div class='col-sm-4'>";
         echo "<div class='teamview'>";
-        if($name)
-            echo "<label class='teamLabel'>".$name."</label></td></tr><tr><td>";
+        if($name) {
+            echo "<label class='teamLabel'>" . $name . "</label></td></tr><tr><td>";
+        }else {
+            echo "<div style='height:15px'></div>";
+        }
         //echo "<ul id=\"cards\" style=\"list-style: none;\">";
         echo "<table class='teamtable'><tr><td style='vertical-align: top;'>";
         echo "<table id=\"cards" . $unique . "\" ><tr class='cardLabel'><td>Card</td><td>Dice</td></tr>";

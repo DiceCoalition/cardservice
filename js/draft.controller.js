@@ -4,12 +4,12 @@ var app = angular.module('draftApp', ["ui.checkbox"]);
 app.controller('DraftController', function() {
     var vm = this;
 
-    vm.sets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf", "gaf", "dp","bat","gotg","xfc", "toa", "thor", "tmnt", "hhs", "ds", "def", "smc", "imw", "sww"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.bacsets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf", "tmnt", "hhs", "imw", "sww", "toa", "thor"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.sets= ["avx", "uxm",  "aou", "asm", "cw", "drs", "dp", "imw", "def","smc", "gotg", "xfc", "thor", "jl", "wol", "wf", "gaf", "bat", "sww", "bff", "fus", "toa", "tmnt", "hhs", "ygo"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.bacsets= ["avx", "uxm", "aou", "asm", "cw", "imw", "thor", "jl", "wol", "wf", "sww", "bff", "fus",  "toa", "tmnt", "hhs", "ygo"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
     vm.starterSets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf"];
-    vm.modernSets= ["wol", "asm", "fus", "cw", "wf", "gaf", "dp","bat", "imw", "sww", "gotg","xfc", "toa", "thor", "tmnt", "hhs", "ds", "def", "smc"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.modernSets= ["wol", "asm", "fus", "cw", "wf", "gaf", "dp","bat", "imw", "sww", "gotg","xfc", "toa", "thor", "tmnt", "hhs", "drs", "def", "smc"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
     vm.modernBacSets= ["wol", "asm", "fus", "cw", "wf", "tmnt", "hhs", "imw", "sww", "toa", "thor" ];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.marvel = ["avx", "uxm", "aou", "asm", "cw", "dp","gotg","xfc", "thor", "ds", "def", "smc", "imw"];
+    vm.marvel = ["avx", "uxm", "aou", "asm", "cw", "dp","gotg","xfc", "thor", "drs", "def", "smc", "imw"];
     vm.dc = ["jl", "wol", "wf", "gaf", "bat", "sww"];
     vm.tmnt = ["tmnt", "hhs"];
     vm.dnd = ["bff", "fus","toa"];
@@ -18,26 +18,29 @@ app.controller('DraftController', function() {
     vm.selectedBacSet = "avx";
     vm.size = "small";
     vm.starter = false;
-	vm.packs="";
-	vm.loading = false;
-	vm.packCount = "8";
+    vm.packs="";
+    vm.loading = false;
+    vm.packCount = "8";
     vm.selection = ['avx'];
     vm.bacselection = ['avx'];
+    //set at bottom of file because it's ugly
+    vm.setNameDictionary = [];
 
 
     vm.load = function()
-	{
+    {
         vm.packs = "";
-		var sl = "t";
-		if(vm.size == "thumbnail") sl = "t";
-		else if(vm.size == "small") sl = "s";
+        var sl = "t";
+        if(vm.size == "thumbnail") sl = "t";
+        else if(vm.size == "small") sl = "s";
         else if(vm.size == "medium") sl = "m";
-		vm.packs = 'draftPacks.php?set='+vm.selectedSet+'&res='+sl+'&bac='+vm.selectedBacSet+'&starter='+vm.starter+'&packs='+vm.packCount+'&'+ new Date().getTime();
-	}
+        vm.packs = 'draftPacks-new.php?set='+vm.selection.join()+'&res='+sl+'&bac='+vm.bacselection.join()+'&starter='+vm.starter+'&packs='+vm.packCount+'&'+ new Date().getTime();
+        //vm.packs = 'draftPacks.php?set='+vm.selectedSet+'&res='+sl+'&bac='+vm.selectedBacSet+'&starter='+vm.starter+'&packs='+vm.packCount+'&'+ new Date().getTime();
+    }
 
     vm.showStarterCheck = function()
     {
-    	var show = false;
+        var show = false;
         if(vm.starterSets.indexOf(vm.selectedSet)!=-1) {
             show = true;
         }
@@ -115,4 +118,35 @@ app.controller('DraftController', function() {
         }
         return className;
     }
+
+    vm.getSetName = function(set)
+    {
+        return vm.setNameDictionary[set];
+    }
+
+    vm.setNameDictionary['avx'] = "Avengers vs X-Men";
+    vm.setNameDictionary['uxm'] = "Uncanny X-men";
+    vm.setNameDictionary['jl'] = "Justice League";
+    vm.setNameDictionary['ygo'] = "Yu-Gi-Oh";
+    vm.setNameDictionary['bff'] =  "Battle For Faerun";
+    vm.setNameDictionary['aou'] = "Age of Ultron";
+    vm.setNameDictionary['wol'] =  "War of Light";
+    vm.setNameDictionary['asm'] = "Amazing Spider-man";
+    vm.setNameDictionary['fus'] = "Faerun Under Siege";
+    vm.setNameDictionary['cw']="Civil War";
+    vm.setNameDictionary['wf'] = "World's Finest";
+    vm.setNameDictionary['gaf'] = "Green Arrow and The Flash";
+    vm.setNameDictionary['dp'] = "Dead Pool";
+    vm.setNameDictionary['bat'] = "Batman";
+    vm.setNameDictionary['gotg'] = "Guardians of the Galaxy";
+    vm.setNameDictionary['xfc'] = "X-Men First Class";
+    vm.setNameDictionary['toa'] = "Tomb of Annihilation";
+    vm.setNameDictionary['thor'] = "The Mighty Thor";
+    vm.setNameDictionary['tmnt'] = "Teenage Mutant Ninja Turtles";
+    vm.setNameDictionary['hhs'] = "Heroes in a Half Shell";
+    vm.setNameDictionary['drs'] = "Doctor Strange";
+    vm.setNameDictionary['def'] = "Defenders";
+    vm.setNameDictionary['smc'] = "Spider-man: Maximum Carnage";
+    vm.setNameDictionary['imw'] = "Iron Man and War Machine";
+    vm.setNameDictionary['sww'] = "Superman and Wonder Woman";
 });
