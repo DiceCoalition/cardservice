@@ -70,7 +70,9 @@ class setInfo
 	"m2017" => "m_op2017",
 	"m2016" => "m_op2016",
 	"m2015" => "m_op2015",
-	"m2014" => "m_op2014",
+	//avengers disassembled double entry
+	"m2014" => "m_op2014",	
+	"uxmop2" => "m_op2014",
 	"uxmop" => "uxmop",
 	"dc2017" =>"dc_op2017",
 	"dc2016" =>"dc_op2016",
@@ -78,13 +80,16 @@ class setInfo
 	"wolop" =>"dc_op2015",
 	"d2016" => "dnd_op2016",
 	"d2015" => "dnd_op2015",
+	//trinity war double entry
 	"dctw" => "dctw",
+	"jlop" => "dctw",
 	"avxop" => "avxop",
 	"wko16dd" => "dnd_wkop2016",
 	"wko16m" => "m_wkop2016",
 	"m_wkop2015" => "m_wkop2015",
 	"wko16dc" => "dc_wkop2016",
-	"dc_wkop2015" => "dc_wkop2015"
+	"dc_wkop2015" => "dc_wkop2015",
+	
     );
 
     public $cardCount = array(
