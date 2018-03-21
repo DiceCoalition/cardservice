@@ -78,8 +78,11 @@ class setInfo
 	"dc2016" =>"dc_op2016",
 	"dc2015" =>"dc_op2015",
 	"wolop" =>"dc_op2015",
+	"dd2016" => "dnd_op2016",
+	"dd2015" => "dnd_op2015",
 	"d2016" => "dnd_op2016",
 	"d2015" => "dnd_op2015",
+	"bffop" => "dnd_op2015",
 	//trinity war double entry
 	"dctw" => "dctw",
 	"jlop" => "dctw",
