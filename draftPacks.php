@@ -18,6 +18,8 @@ $bacSet = strtolower($_GET['bac']);
 $res = strtolower($_GET['res']);
 $includeStarter = $_GET['starter'];
 $packCountString = $_GET['packs'];
+$hidePacks = $_GET['hide'];
+$cap = $_GET['cap'];
 
 
 if(!$packCountString)
@@ -31,6 +33,11 @@ if(!$res)
     $res = "s";
 if(!$includeStarter)
     $includeStarter = "false";
+if(!$hidePacks)
+    $hidePacks = "false";
+if(!$cap)
+    $cap = "0";
+
 
 if(!$set){
     echo "Please specify a set. example: draftpacks.php?set=avx";
@@ -71,13 +78,20 @@ foreach($sets as &$value){
     $cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 2));
 }
 
-
+$cardCount = count($cardSRPool) + count($cardRarePool)+count($cardUCPool)+count($cardCPool);
+while($cardCount < 192){
+	foreach($sets as &$value){
+		$cardCPool = array_merge($cardCPool, getCommons($value, $includeStarter, 1));
+	}
+	$cardCount = count($cardSRPool) + count($cardRarePool)+count($cardUCPool)+count($cardCPool);
+}
 shuffle($cardBacPool);
 shuffle($cardSRPool);
 shuffle($cardRarePool);
 shuffle($cardUCPool);
 shuffle($cardCPool);
 
+$poolDict = array();
 
 $ctDisplay = array();
 for($p = 0; $p < 8; $p++) {
@@ -108,6 +122,15 @@ for($p = 0; $p < 8; $p++) {
         if ($p < 2) {
 
             $index = rand(0, $size - 1);
+			$card = $cardSRPool[$index];
+			$cardInt = intval($card->Number)-1;
+			$cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
+			if (isset($poolDict[$cardName])) {
+				$poolDict[$cardName] +=1 ;
+			}
+			else {						
+				$poolDict[$cardName] = 1;
+			}
             array_push($cards, $cardSRPool[$index]);
             array_splice($cardSRPool, $index, 1);
             $ucCount = 3;
@@ -115,6 +138,15 @@ for($p = 0; $p < 8; $p++) {
         } else {
             $size = count($cardRarePool);
             $index = rand(0, $size - 1);
+			$card = $cardRarePool[$index];
+			$cardInt = intval($card->Number)-1;
+			$cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
+			if (isset($poolDict[$cardName])) {
+				$poolDict[$cardName] +=1 ;
+			}
+			else {						
+				$poolDict[$cardName] = 1;
+			}
             array_push($cards, $cardRarePool[$index]);
             array_splice($cardRarePool, $index, 1);
         }
@@ -126,6 +158,15 @@ for($p = 0; $p < 8; $p++) {
         $size = count($cardUCPool);
         for ($i = 0; $i < $ucCount; $i++) {
             $index = rand(0, $size - 1);
+			$card = $cardUCPool[$index];
+			$cardInt = intval($card->Number)-1;
+			$cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
+			if (isset($poolDict[$cardName])) {
+				$poolDict[$cardName] +=1 ;
+			}
+			else {						
+				$poolDict[$cardName] = 1;
+			}
             array_push($cards, $cardUCPool[$index]);
             array_splice($cardUCPool, $index, 1);
             $size = $size - 1;
@@ -135,7 +176,7 @@ for($p = 0; $p < 8; $p++) {
         $cCount = 12;
     }
 
-    $size = count($cardCPool);
+    $size = count($cardCPool);	
     if ($size > 0) {
         $cardNums = array();
         for ($i = 0; $i < $cCount; $i++) {
@@ -143,8 +184,33 @@ for($p = 0; $p < 8; $p++) {
             $card = $cardCPool[$index];
             while (in_array($card->Number, $cardNums)) {
                 $index = rand(0, $size - 1);
-                $card = $cardCPool[$index];
+                $card = $cardCPool[$index];				
             }
+			if($cap >2 ){				
+					$cardInt = intval($card->Number)-1;
+					$cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
+					//echo $cardName;
+					if (isset($poolDict[$cardName])) {							
+						if($poolDict[$cardName] < $cap){							
+							$poolDict[$cardName] +=1; 
+						} else{							
+							while($poolDict[$cardName] > $cap-1){								
+								$index = rand(0, $size - 1);
+								$card = $cardCPool[$index];
+								$cardInt = intval($card->Number)-1;
+								$cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
+							}
+							if (isset($poolDict[$cardName])) {
+								$poolDict[$cardName] +=1 ;
+							}
+							else {						
+								$poolDict[$cardName] = 1;
+							}
+						}						
+					} else {						
+						$poolDict[$cardName] = 1;
+					}					
+				}
             array_push($cardNums, $card->Number);
             array_push($cards, $card);
             array_splice($cardCPool, $index, 1);
@@ -158,10 +224,25 @@ shuffle($ctDisplay);
 
 $cardDict = array();
 $bacDict = array();
+$draftCards = "";
+
+$echoString ="";
 for($c = 0; $c < $packCount; $c++) {
     $packNum = $c+1;
     $cards = $ctDisplay[$c];
-    echo "<h1>Pack ".$packNum."</h1><br>";
+	$packstring = "";
+	for ($i = 0; $i < count($cards); $i++) {
+		if($i !=0){
+			$packstring = $packstring.";";
+		}
+		$card = $cards[$i];
+		$packstring= $packstring.$card->Set.$card->Number;		
+	}
+	$packurl = "http://dp.dicecoalition.com/pack.html#?pack=".$packstring;
+	$draftCards = $draftCards."#".$packNum.":".$packstring;
+//	echo $draftCards;
+    //echo "<h1><a href='".$packurl."' target='_blank'> Pack ".$packNum."</a></h1><br>";
+	$echoString .= "<h1><a href='".$packurl."' target='_blank'> Pack ".$packNum."</a></h1><br>";
     for ($i = 0; $i < count($cards); $i++) {
         $card = $cards[$i];
         $url = "http://dicecoalition.com/cardservice/Img.php?set=" . $card->Set . "&cardnum=" . $card->Number . "&res=".$res;
@@ -173,8 +254,9 @@ for($c = 0; $c < $packCount; $c++) {
         else if($card->Rarity == "c") $color = "grey";
         $style = "style=\"border:3px solid ".$color.";\" ";
         $img = file_get_contents($url);
-        $img = substr_replace($img, $style, 5, 0);
-        echo $img; //readfile($url)."<br>";
+        $img = substr_replace($img, $style, 5, 0);		
+		$echoString .= $img;
+			//echo $img; //readfile($url)."<br>";
         //minus 1 because we are retrievning from 0 based arrays
         $cardInt = intval($card->Number)-1;
         $cardName = get_object_vars($cardInfo)[$card->Set][$cardInt]."-".$card->Set;
@@ -194,6 +276,11 @@ for($c = 0; $c < $packCount; $c++) {
         }
     }
 }
+$b64packs = base64_encode($draftCards);
+$drafturl = "http://dp.dicecoalition.com/vd.html#?pack=".$b64packs;
+echo "<h1><a href='".$drafturl."' target='_blank'> Create Draft Room</a></h1><br>";
+if($hidePacks == "false")
+	echo $echoString;
 ksort($cardDict);
 ksort($bacDict);
 echo "<style>tr:nth-child(even) {background: #CCC} tr:nth-child(odd) {background: #FFF} </style>";

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="draftApp">
 <head>
-    <title>Trubie's DM Draft Generator</title>
+    <title>Trubie's Draft Packs</title>
     <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -90,7 +90,7 @@
     <div class="row" style="padding-top:1cm; text-align:center">
         <h2>
             <img src="must.png">
-            Trubie's Draft Pack Generator
+            Trubie's Draft Packs
             <img src="must.png">
         </h2>
     </div>
@@ -111,6 +111,7 @@
                            title="{{draftCtrl.setNameDictionary[set]}}"
                            ng-checked="draftCtrl.selection.indexOf(set) > -1"
                            ng-click="draftCtrl.toggleSelection(set)"
+						   ng-disabled="draftCtrl.disabledSets.indexOf(set) > -1"
                     >
                     <label class="form-check-label" for="cb{{set}}" title="{{draftCtrl.setNameDictionary[set]}}">{{set}}</label>
                 </div>
@@ -136,6 +137,7 @@
                            title="{{draftCtrl.setNameDictionary[bacset]}}"
                            ng-checked="draftCtrl.bacselection.indexOf(bacset) > -1"
                            ng-click="draftCtrl.toggleBacSelection(bacset)"
+						   ng-disabled="draftCtrl.disabledSets.indexOf(bacset) > -1"
                     >
                     <label class="form-check-label" for="cbb{{bacset}}" title="{{draftCtrl.setNameDictionary[bacset]}}">{{bacset}}</label>
                 </div>
@@ -161,15 +163,27 @@
                 <option value="6">6</option>
                 <option value="7">7</option>
                 <option value="8">8</option>
-            </select>
+            </select>			
             Image Size:
             <select ng-model="draftCtrl.size">
                 <option ng-repeat="z in draftCtrl.sizes">{{z}}</option>
             </select>
-
+			<br>
+			Common Character Cap:
+            <select ng-model="draftCtrl.charCap">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>                
+				<option value="7">7</option>
+				<option value="8">8</option>
+            </select>
             <br>
             <label ng-show="draftCtrl.showStarterCheck()">Include Starter:
                 <input type="checkbox" ng-model="draftCtrl.starter">
+            </label>
+			<label>Hide Packs:
+                <input type="checkbox" ng-model="draftCtrl.hidePacks">
             </label>
         </div>
         <div style="padding-top:10px"><button type="button" ng-click="draftCtrl.load()">Get Packs</button></div>

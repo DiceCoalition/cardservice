@@ -29,19 +29,7 @@ $unique = uniqid();
 if($cards) {
     echo "<script type=\"text/javascript\" src=\"http://dicecoalition.com/cardservice/js/jquery-3.3.1.min.js\"></script>";
     //echo " <link href=\"http://dicecoalition.com/cardservice/css/bootstrap.min.css\" rel=\"stylesheet\" media=\"screen\" />";
-    echo "<script>
-        $(document).ready(function() {                        
-            $('#cards".$unique." td a').hover(
-                function(){
-                    //we get our current filename and use it for the src
-                    var linkIndex = $(this).attr('data-filename');
-                    $(this).addClass('hover');
-                    $('.box".$unique." img').attr('src', linkIndex);
-                }            
-            );        
-        });
-        
-    </script>";
+    
     $cardsArray = explode(';', $cards);
     if($format === "hybrid" or !$format) {
         //echo "<div class='container teamview'><div class='row'><div class='col-sm-4'>";
@@ -152,7 +140,20 @@ if($cards) {
     echo "<style>.teamLabel { font-weight:700;font-style:italic;font-size:1.4rem;margin:0;padding:0;text-align: left}</style>";
     echo "<style>.cardLabel { font-weight:700;font-size:1.4rem;margin:0;padding:0}</style>";
     //echo "<link href=\"http://dicecoalition.com/cardservice/css/lightbox.css\" rel=\"stylesheet\">";
-    echo "<script src=\"http://dicecoalition.com/cardservice/js/lightbox.js\"></script>";
+    echo "<script src=\"http://dicecoalition.com/cardservice/js/lightbox-plus-jquery.js\"></script>";
+	echo "<script>
+        $(document).ready(function() {                        
+            $('#cards".$unique." td a').hover(
+                function(){
+                    //we get our current filename and use it for the src
+                    var linkIndex = $(this).attr('data-filename');
+                    $(this).addClass('hover');
+                    $('.box".$unique." img').attr('src', linkIndex);
+                }            
+            );        
+        });
+        
+    </script>";
 }
 foreach (array_keys($GLOBALS) as $k) unset($$k);
 unset($k);

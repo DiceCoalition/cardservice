@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html ng-app="packApp">
+<head>
+    <title>Trubie's Virtual Draft</title>
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script type="text/javascript" src="js/angular-bootstrap-checkbox.js"></script>    
+    <script type="text/javascript" src="js/pack2.controller.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+ 
+	
+	<script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+	
+    <link
+            href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://dicecoalition.com/css/general.css">
+    <link rel="stylesheet" href="http://dicecoalition.com/css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--favicons-->
+    <link rel="apple-touch-icon" sizes="120x120" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+   
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      max-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .members-count,
+    .members-list,
+    .messages {
+      border: 1px solid #e4e4e4;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .messages {
+      flex-shrink: 1;
+      overflow: auto;
+    }
+    .message {
+      padding: 5px 0;
+    }
+    .message .member {
+      display: inline-block;
+    }
+    .member {
+      padding-right: 10px;
+      position: relative;
+    }
+    .message-form {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .message-form__input {
+      flex-grow: 1;
+      border: 1px solid #dfdfdf;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+    .message-form__button {
+      margin: 10px;
+    }
+	
+	.card{
+		transition: transform .2s; /* Animation */
+		height: 231px;
+	}
+	.card:hover{
+		transform: scale(1.5);
+	}
+  </style>
+</head>
+
+<body ng-controller="PackCtrl as pc" style="margin:0; padding:0; background-color:lightgrey;">
+<!--Navbar-->
+<div w3-include-html="topbar.php"></div>
+<script>
+    w3.includeHTML();
+	
+	function copyToClipboard() {
+	  /* Get the text field */
+	  var copyText = document.getElementById("myInput");
+
+	  /* Select the text field */
+	  copyText.select();
+
+	  /* Copy the text inside the text field */
+	  document.execCommand("copy");
+
+	  /* Alert the copied text */
+	  alert("Copied the text: " + copyText.value);
+	}
+</script>
+<div class="container">
+    <div class="row" style="padding-top:1cm; text-align:center">
+        <h2>
+            <img src="must.png">
+            Trubie's Virtual Draft
+            <img src="must.png">
+        </h2>	
+		<div ng-if="pc.playerNumber == 1 && pc.connectedPlayers < pc.playerCount">
+		You are player 1. Send additional players this URL:
+		<a href="http://dp.dicecoalition.com/vd.html#?channel={{pc.CLIENT_ID}}" target="_blank">http://dp.dicecoalition.com/vd.html#?channel={{pc.CLIENT_ID}}</a>
+		</div>
+		<div ng-if="pc.connectedPlayers < pc.playerCount">Waiting for {{pc.playerCount - pc.connectedPlayers}} players to join...</div>
+		<button ng-if="pc.connectedPlayers < pc.playerCount" ng-click="pc.addBots()">Start with {{pc.playerCount - pc.connectedPlayers}} draft bots (in development)</button>
+    </div>
+    <div class="row" >
+		<div class="col-xs-6 col-md-3">
+			<div class="members-count">-</div>
+				  <div class="members-list">-</div>
+				  <div class="messages" style="max-height:300px"></div>
+				  <form class="message-form" onsubmit="return false;">
+					<input class="message-form__input" placeholder="Type a message.." type="text"/>
+					<input class="message-form__button" value="Send" type="submit"/>
+				  </form>				  
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<h2>Picks: {{pc.picks}}</h2>
+			<div>
+				<img class="card" ng-if="pc.selection != pick || ($index != (pc.pickArray.length -1))" ng-repeat="pick in pc.pickArray track by $index" src="{{pc.getImageUrl(pick)}}">
+				<img class="card" ng-if="pc.selection == pick && $index == (pc.pickArray.length -1)" ng-repeat="pick in pc.pickArray track by $index" src="{{pc.getImageUrl(pick)}}" style="opacity:0.5">
+			</div>
+			
+			<div style="text-align:center" ng-show="pc.pickArray.length > 13">				
+				<h2>Draft Complete! Team URL:</h2>
+				<a href="http://www.dicecoalition.com/cardservice/pack.html#?pick={{pc.pickArray.join(';')}}" target="_blank">http://www.dicecoalition.com/cardservice/pack.html#?pick={{pc.pickArray.join(';')}}</a><br>
+				
+			</div>
+			<!--
+			<div ng-repeat="pick in pc.pickArray">
+			  {{pick}}
+			  <img src="{{pc.getImageUrl(pick)}}">
+			</div>
+			-->
+			<button ng-disabled="pc.selection == '' || pc.pickArray.length > 13 || pc.connectedPlayers < pc.playerCount" ng-click="pc.sendPack()">Confirm Selection</button>
+			<h2>Pack:</h2>
+			<div style="text-align:center" ng-show="pc.packArray.length == 0">		
+				<img src="images/loading.gif"><br>
+				<h2>... waiting on player selection...</h2>
+			</div>
+			<div>
+				<img class="card" ng-if="pc.selection != card" ng-repeat="card in pc.packArray track by $index" src="{{pc.getImageUrl(card)}}" ng-click="pc.onClick(card)" >
+				<img class="card" ng-if="pc.selection == card" ng-repeat="card in pc.packArray track by $index" src="{{pc.getImageUrl(card)}}" ng-click="pc.onClick(card)" style="opacity:0.5">
+			</div>
+
+			<button ng-disabled="pc.selection == '' || pc.pickArray.length > 13 || pc.connectedPlayers < pc.playerCount" ng-click="pc.sendPack()">Confirm Selection</button>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div id="rainbowDiv" ng-include="pc.rainbow"></div>
+		</div>
+	</div>
+  <!--  <div id="packDiv" ng-include="pc.packs"></div> -->
+  
+<!-- <script type="text/javascript" src="js/chat.js"></script> -->
+
+    <div class="row" style="text-align:center; padding: 3px; font-size: small;" >
+        Draft Pack Picker by Trubie Turner. The images on this website are copyrighted by NECA/WizKids LLC. This website is not affiliated with nor endorsed by NECA/WizKids LLC.
+    </div>
+	
+	
+	
+</div>
+</body>
+</html>
