@@ -70,8 +70,8 @@ class setInfo
     "tmnt" => "TMNT" ,
     "hhs" => "HHS" ,
     "ygo" => "YGO" ,
-	"bou" => "BOU" ,
-	"orks" => "ORKS" ,
+	"bfu" => "BFU" ,
+	"ork" => "ORK" ,
 	"sw" => "SW" ,
 	
 	"m2017" => "m_op2017",
@@ -134,8 +134,8 @@ class setInfo
         "tmnt" => 58 ,
         "hhs" => 58 ,
         "ygo" => 120,
-		"bou" => 58,
-		"orks" => 24,
+		"bfu" => 58,
+		"ork" => 24,
 		"sw" => 24
     );
 
@@ -161,7 +161,7 @@ class setInfo
         "tmnt" => "49-58" ,
         "hhs" => "49-58" ,
         "ygo" => "111-120" ,
-		"bou" => "49-58"
+		"bfu" => "49-58"
     );
 
     public $setCommons = array(
@@ -196,8 +196,8 @@ class setInfo
         "tmnt" => "1-48" ,
         "hhs" => "1-48" ,
         "ygo" => "1-40" ,
-		"bou" => "1-48" ,
-		"orks" => "1-24" ,
+		"bfu" => "1-48" ,
+		"ork" => "1-24" ,
 		"sw" => "1-24"
     );
 
@@ -274,8 +274,8 @@ class setInfo
 	public $DC = array("jl", "wol", "wf", "gaf","bat", "sww", "hq");
 	public $TMNT = array("tmnt", "hhs");
 	public $DnD = array("bff", "fus", "toa");
-	public $W4K = array("bou", "orks", "sw");
-	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "ai", "ki", "jll", "bou", "orks", "sw");
+	public $W4K = array("bfu", "ork", "sw");
+	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "ai", "ki", "jll", "bfu", "ork", "sw");
 	public $modernMarvel = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll");
 	public $modernDC = array("bat", "sww", "hq");
 	public $modernTMNT = array("tmnt", "hhs");
@@ -284,7 +284,7 @@ class setInfo
 	public $bacDC = array("jl", "wol", "wf", "sww", "hq");
 	public $bacTMNT = array("tmnt", "hhs");
 	public $bacDnD = array("bff", "fus", "toa");
-	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bou");
+	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu");
 	public $bacModernMarvel = array("imw", "thor", "ai");
 	public $bacModernDC = array("sww", "hq");
 	public $bacModernTMNT = array("hhs");

@@ -8,7 +8,7 @@
 
 class cardInfo
 {
-   public $bou = array(
+   public $bfu = array(
    'Foetid Bloat-Drone',
    'Foetid Bloat-Drone',
    'Foetid Bloat-Drone',
@@ -69,7 +69,7 @@ class cardInfo
    'Static Field',
 );
 
-   public $orks = array(
+   public $ork = array(
    'Battle Wagon',
    'Battle Wagon',
    'Battle Wagon',

@@ -8,7 +8,7 @@
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script type="text/javascript" src="js/angular-bootstrap-checkbox.js"></script>    
-    <script type="text/javascript" src="js/pack2.controller.js"></script>
+    <script type="text/javascript" src="js/vd.controller.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
  
 	
@@ -119,7 +119,7 @@
 		<a href="http://dp.dicecoalition.com/vd.html#?channel={{pc.CLIENT_ID}}" target="_blank">http://dp.dicecoalition.com/vd.html#?channel={{pc.CLIENT_ID}}</a>
 		</div>
 		<div ng-if="pc.connectedPlayers < pc.playerCount">Waiting for {{pc.playerCount - pc.connectedPlayers}} players to join...</div>
-		<button ng-if="pc.connectedPlayers < pc.playerCount" ng-click="pc.addBots()">Start with {{pc.playerCount - pc.connectedPlayers}} draft bots (in development)</button>
+		<button ng-if="pc.connectedPlayers < pc.playerCount" ng-click="pc.addBots()">Start with {{pc.playerCount - pc.connectedPlayers}} draft bots (BETA)</button>
     </div>
     <div class="row" >
 		<div class="col-xs-6 col-md-3">
