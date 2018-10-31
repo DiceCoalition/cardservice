@@ -203,7 +203,7 @@ class setInfo
 
     public $setUncommons = array(
         "avx" => "65-98" ,
-        "uxm" => "64-94" ,
+        "uxm" => "63-94" ,
         "aou" => "75-106" ,
         "asm" => "75-106" ,
         "cw" => "73-104" ,
