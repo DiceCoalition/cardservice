@@ -70,9 +70,9 @@ class cardInfo
 );
 
    public $ork = array(
-   'Battle Wagon',
-   'Battle Wagon',
-   'Battle Wagon',
+   'Battlewagon',
+   'Battlewagon',
+   'Battlewagon',
    'Ghazghkul Thraka',
    'Ghazghkul Thraka',
    'Ghazghkul Thraka',
