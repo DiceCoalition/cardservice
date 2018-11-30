@@ -4,16 +4,16 @@ var app = angular.module('draftApp', ["ui.checkbox"]);
 app.controller('DraftController', function() {
     var vm = this;
 
-    vm.sets= ["avx", "uxm",  "aou", "asm", "cw", "drs", "dp", "imw", "def","smc", "gotg", "xfc", "thor", "jll", "ki", "ai", "jl", "wol", "wf", "gaf", "bat", "sww", "hq", "bff", "fus", "toa", "tmnt", "hhs", "ygo", "bou", "orks", "sw"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.bacsets= ["avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "jl", "wol", "wf", "sww", "hq", "bff", "fus",  "toa", "tmnt", "hhs", "ygo", "bou"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.sets= ["avx", "uxm",  "aou", "asm", "cw", "drs", "dp", "imw", "def","smc", "gotg", "xfc", "thor", "jll", "ki", "ai", "jl", "wol", "wf", "gaf", "bat", "sww", "hq", "bff", "fus", "toa", "tmnt", "hhs", "ygo", "bfu", "ork", "sw"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.bacsets= ["avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "jl", "wol", "wf", "sww", "hq", "bff", "fus",  "toa", "tmnt", "hhs", "ygo", "bfu"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
     vm.starterSets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf"];
-    vm.modernSets= ["bat", "imw", "sww", "gotg","xfc", "toa", "thor", "ai", "hhs", "drs", "def", "smc", "jll", "ki", "hq", "bou", "orks", "sw"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.modernBacSets= ["imw", "sww", "toa", "thor", "ai", "hq", "bou"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.modernSets= ["bat", "imw", "sww", "gotg","xfc", "toa", "thor", "ai", "hhs", "drs", "def", "smc", "jll", "ki", "hq", "bfu", "ork", "sw"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.modernBacSets= ["imw", "sww", "toa", "thor", "ai", "hq", "bfu"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
     vm.marvel = ["avx", "uxm", "aou", "asm", "cw", "dp","gotg","xfc", "thor", "drs", "def", "smc", "imw", "ai", "jll", "ki"];
     vm.dc = ["jl", "wol", "wf", "gaf", "bat", "sww", "hq"];
     vm.tmnt = ["tmnt", "hhs"];
     vm.dnd = ["bff", "fus","toa"];
-	vm.w4k = ["bou", "orks", "sw"];
+	vm.w4k = ["bfu", "ork", "sw"];
     vm.sizes= ["thumbnail","small","medium"];
     vm.selectedSet = "avx";
     vm.selectedBacSet = "avx";
@@ -29,7 +29,7 @@ app.controller('DraftController', function() {
 	vm.charCap = "6";
 	vm.hidePacks = false;
 	
-	vm.disabledSets = ["bou", "orks", "sw"];
+	vm.disabledSets = [];
 
     vm.load = function()
     {
@@ -163,11 +163,11 @@ app.controller('DraftController', function() {
     vm.setNameDictionary['smc'] = "Spider-man: Maximum Carnage";
     vm.setNameDictionary['imw'] = "Iron Man and War Machine";
     vm.setNameDictionary['sww'] = "Superman and Wonder Woman";
-	vm.setNameDictionary['hq'] = "Harley Quinn - Coming Soon!";
-	vm.setNameDictionary['ki'] = "Kree Invasion - Coming Soon!";
-	vm.setNameDictionary['jll'] = "Justice Like Lightning - Coming Soon!";
-	vm.setNameDictionary['ai'] = "Avengers Infinity - Coming Soon!";
-	vm.setNameDictionary['bou'] = "Warhammer 40K: Battle of Ultramar - Coming Soon!";
-	vm.setNameDictionary['orks'] = "Orks - WAAGH! Team Pack - Coming Soon!";
-	vm.setNameDictionary['sw'] = "Space Wolves - Sons of Russ Team Pack - Coming Soon!";
+	vm.setNameDictionary['hq'] = "Harley Quinn";
+	vm.setNameDictionary['ki'] = "Kree Invasion";
+	vm.setNameDictionary['jll'] = "Justice Like Lightning";
+	vm.setNameDictionary['ai'] = "Avengers Infinity";
+	vm.setNameDictionary['bfu'] = "Warhammer 40K: Battle for Ultramar";
+	vm.setNameDictionary['ork'] = "ork - WAAGH! Team Pack";
+	vm.setNameDictionary['sw'] = "Space Wolves - Sons of Russ Team Pack";
 });

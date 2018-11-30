@@ -66,7 +66,7 @@ class cardInfo
    'Orbital Strike',
    'Rolling Thunder',
    'Seething',
-   'Static Field',
+   'Static Field'
 );
 
    public $ork = array(
@@ -93,7 +93,7 @@ class cardInfo
    'Stormboyz',
    'Warbiker',
    'Warbiker',
-   'Warbiker',
+   'Warbiker'
 );
 
    public $sw = array(
@@ -120,7 +120,7 @@ class cardInfo
    'Wolf Guard Terminator',
    'Wulfen',
    'Wulfen',
-   'Wulfen',
+   'Wulfen'
 );
 
    public $hq =  array(
