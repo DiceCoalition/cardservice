@@ -99,7 +99,8 @@ class setInfo
 	"m_wkop2015" => "m_wkop2015",
 	"wko16dc" => "dc_wkop2016",
 	"dc_wkop2015" => "dc_wkop2015",
-	"sk2017" => "sk2017",
+    "sk2017" => "sk2017",
+    "wd2018" => "wd_op2018",
     );
 
     public $cardCount = array(
