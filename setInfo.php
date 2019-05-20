@@ -55,6 +55,9 @@ class setInfo
 	"ai" => "AI" ,
 	"ki" => "KI" ,
 	"jll" => "JLL",
+	"xmf" => "XMF",
+	"xfo" => "XFO",
+	"dxm" => "DXM",
 
     "jl" => "JL" ,
     "wol" => "WOL" ,
@@ -62,7 +65,10 @@ class setInfo
     "gaf" => "GAF" ,
     "bat" => "BAT" ,
     "sww" => "SMWW" ,
-	"hq" => "HQ" ,
+    "hq" => "HQ" ,
+    "jus" => "JUS",
+    "doom" => "DOOM",
+    "myst" => "MYST",
 
     "bff" => "BFF" ,
     "fus" => "FUS" ,
@@ -73,7 +79,8 @@ class setInfo
 	"bfu" => "BFU" ,
 	"ork" => "ORK" ,
 	"sw" => "SW" ,
-	
+    
+    "m2019" => "m_op2019",
 	"m2017" => "m_op2017",
 	"m2016" => "m_op2016",
 	"m2015" => "m_op2015",
@@ -120,6 +127,9 @@ class setInfo
 		"ai" => 58 ,
 		"ki" => 24 ,
 		"jll" => 24 ,
+		"xmf" => 72 ,
+		"xfo" => 24 ,
+		"dxm" => 24 ,
 
         "jl" => 138 ,
         "wol" => 142 ,
@@ -127,7 +137,10 @@ class setInfo
         "gaf" => 124 ,
         "bat" => 124 ,
         "sww" => 34 ,
-		"hq" => 24 ,
+        "hq" => 24 ,
+        "jus" => 73,
+        "doom" => 24,
+        "myst" => 24,
 
         "bff" => 138 ,
         "fus" => 142 ,
@@ -149,12 +162,14 @@ class setInfo
         "imw" => "25-34" ,
         "thor" => "1-12" ,
 		"ai" => "49-58" ,
+		"xmf" => "63-72" ,
 
         "jl" => "25-34" ,
         "wol" => "25-34" ,
         "wf" => "25-34" ,
         "sww" => "25-34" ,
-		"hq" => "22-24" ,
+        "hq" => "22-24" ,
+        "jus" => "64-73",
 
         "bff" => "129-138" ,
         "fus" => "25-34" ,
@@ -182,6 +197,9 @@ class setInfo
 		"ai" => "1-48",
 		"ki" => "1-24",
 		"jll" => "1-24",
+		"xmf" => "1-62",
+		"xfo" => "1-24",
+		"dxm" => "1-24",
 
         "jl" => "1-24,35-73" ,
         "wol" => "1-24,35-74" ,
@@ -189,7 +207,10 @@ class setInfo
         "gaf" => "1-40" ,
         "bat" => "1-40" ,
         "sww" => "1-24" ,
-		"hq" => "1-21",
+        "hq" => "1-21",
+        "jus" => "1-63",
+        "doom" => "1-24",
+        "myst" => "1-24",
 
         "bff" => "1-24,25-64" ,
         "fus" => "1-24,35-74" ,
@@ -271,23 +292,23 @@ class setInfo
         "ygo" => "107-110"
     );
 	
-	public $Marvel = array("avx", "uxm", "aou", "asm", "cw", "drs", "dp", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll");
-	public $DC = array("jl", "wol", "wf", "gaf","bat", "sww", "hq");
+	public $Marvel = array("avx", "uxm", "aou", "asm", "cw", "drs", "dp", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm");
+	public $DC = array("jl", "wol", "wf", "gaf","bat", "sww", "hq", "jus", "doom", "myst");
 	public $TMNT = array("tmnt", "hhs");
 	public $DnD = array("bff", "fus", "toa");
 	public $W4K = array("bfu", "ork", "sw");
-	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "ai", "ki", "jll", "bfu", "ork", "sw");
-	public $modernMarvel = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll");
-	public $modernDC = array("bat", "sww", "hq");
+	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "jus", "doom", "myst", "ai", "ki", "jll", "bfu", "ork", "sw", "xmf","xfo","dxm");
+	public $modernMarvel = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm");
+	public $modernDC = array("bat", "sww", "hq", "jus", "doom", "myst");
 	public $modernTMNT = array("tmnt", "hhs");
 	public $modernDnD = array("fus", "toa");
-	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai");
+	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "xmf");
 	public $bacDC = array("jl", "wol", "wf", "sww", "hq");
 	public $bacTMNT = array("tmnt", "hhs");
 	public $bacDnD = array("bff", "fus", "toa");
-	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu");
-	public $bacModernMarvel = array("imw", "thor", "ai");
-	public $bacModernDC = array("sww", "hq");
+	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu", "xmf");
+	public $bacModernMarvel = array("imw", "thor", "ai", "xmf");
+	public $bacModernDC = array("sww", "hq", "jus");
 	public $bacModernTMNT = array("hhs");
 	public $bacModernDnD = array("toa");
     
