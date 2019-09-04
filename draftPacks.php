@@ -9,6 +9,8 @@
 include("setInfo.php");
 include("Card.php");
 include("cardInfo.php");
+include("ImgFunc.php");
+
 
 $setInfo = new setInfo();
 $cardInfo = new cardInfo();
@@ -245,7 +247,9 @@ for($c = 0; $c < $packCount; $c++) {
 	$echoString .= "<h1><a href='".$packurl."' target='_blank'> Pack ".$packNum."</a></h1><br>";
     for ($i = 0; $i < count($cards); $i++) {
         $card = $cards[$i];
-        $url = "http://dicecoalition.com/cardservice/Img.php?set=" . $card->Set . "&cardnum=" . $card->Number . "&res=".$res;
+        //$url = "http://dicecoalition.com/cardservice/Img.php?set=" . $card->Set . "&cardnum=" . $card->Number . "&res=".$res;
+		$url = "Img.php?set=" . $card->Set . "&cardnum=" . $card->Number . "&res=".$res;
+	
         //$out = exec($url);
         $color = "black";
         if($card->Rarity == "sr") $color = "red";
@@ -253,7 +257,13 @@ for($c = 0; $c < $packCount; $c++) {
         else if($card->Rarity == "uc") $color = "green";
         else if($card->Rarity == "c") $color = "grey";
         $style = "style=\"border:3px solid ".$color.";\" ";
-        $img = file_get_contents($url);
+        //$img = //exec($url);//file_get_contents($url);
+		
+		//echo $card->Set." ".$card->Number." ".$res."<br>";
+		//calling ImgFunc to get <img> tag
+		$img = getImg($card->Set, $card->Number, $res);
+		
+		//echo $img;
         $img = substr_replace($img, $style, 5, 0);		
 		$echoString .= $img;
 			//echo $img; //readfile($url)."<br>";
