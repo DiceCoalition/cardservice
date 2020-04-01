@@ -73,12 +73,18 @@ class setInfo
     "bff" => "BFF" ,
     "fus" => "FUS" ,
     "toa" => "TOA" ,
+	"tiw" => "TIW" ,
+	"aiw" => "AIW" ,
+	"zhn" => "ZHN" ,
     "tmnt" => "TMNT" ,
     "hhs" => "HHS" ,
     "ygo" => "YGO" ,
 	"bfu" => "BFU" ,
 	"ork" => "ORK" ,
 	"sw" => "SW" ,
+	"wwe" => "WWE",
+	"tag" => "TAG",
+	"bit" => "BIT",
     
     "m2019" => "m_op2019",
 	"m2017" => "m_op2017",
@@ -145,12 +151,18 @@ class setInfo
         "bff" => 138 ,
         "fus" => 142 ,
         "toa" => 137 ,
+		"tiw" => 59,
+		"aiw" => 24,
+		"zhn" => 24,
         "tmnt" => 58 ,
         "hhs" => 58 ,
         "ygo" => 120,
 		"bfu" => 58,
 		"ork" => 24,
-		"sw" => 24
+		"sw" => 24,
+		"wwe" => 58,
+		"tag" => 24,
+		"bit" => 24
     );
 
     public $setBACs = array(
@@ -174,10 +186,12 @@ class setInfo
         "bff" => "129-138" ,
         "fus" => "25-34" ,
         "toa" => "1-12" ,
+		"tiw" => "50-59" ,
         "tmnt" => "49-58" ,
         "hhs" => "49-58" ,
         "ygo" => "111-120" ,
-		"bfu" => "49-58"
+		"bfu" => "49-58",
+		"wwe" => "49-58"
     );
 
     public $setCommons = array(
@@ -215,12 +229,18 @@ class setInfo
         "bff" => "1-24,25-64" ,
         "fus" => "1-24,35-74" ,
         "toa" => "13-52" ,
+		"tiw" => "1-49",
+		"aiw" => "1-24",
+		"zhn" => "1-24",
         "tmnt" => "1-48" ,
         "hhs" => "1-48" ,
         "ygo" => "1-40" ,
 		"bfu" => "1-48" ,
 		"ork" => "1-24" ,
-		"sw" => "1-24"
+		"sw" => "1-24",
+		"wwe" => "1-48",
+		"bit" => "1-24",
+		"tag" => "1-24"
     );
 
     public $setUncommons = array(
@@ -295,21 +315,22 @@ class setInfo
 	public $Marvel = array("avx", "uxm", "aou", "asm", "cw", "drs", "dp", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm");
 	public $DC = array("jl", "wol", "wf", "gaf","bat", "sww", "hq", "jus", "doom", "myst");
 	public $TMNT = array("tmnt", "hhs");
-	public $DnD = array("bff", "fus", "toa");
+	public $DnD = array("bff", "fus", "toa", "tiw", "aiw", "zhn");
 	public $W4K = array("bfu", "ork", "sw");
-	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "jus", "doom", "myst", "ai", "ki", "jll", "bfu", "ork", "sw", "xmf","xfo","dxm");
+	public $WWE = array("wwe", "tag", "bit");
+	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "jus", "doom", "myst", "ai", "ki", "jll", "bfu", "ork", "sw", "xmf","xfo","dxm", "tiw", "aiw", "zhn", "wwe", "bit", "tag");
 	public $modernMarvel = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm");
 	public $modernDC = array("bat", "sww", "hq", "jus", "doom", "myst");
 	public $modernTMNT = array("tmnt", "hhs");
-	public $modernDnD = array("fus", "toa");
+	public $modernDnD = array("toa", "tiw", "aiw", "zhn");
 	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "xmf");
 	public $bacDC = array("jl", "wol", "wf", "sww", "hq");
 	public $bacTMNT = array("tmnt", "hhs");
-	public $bacDnD = array("bff", "fus", "toa");
-	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu", "xmf");
+	public $bacDnD = array("bff", "fus", "toa", "tiw");
+	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu", "xmf", "tiw", "wwe");
 	public $bacModernMarvel = array("imw", "thor", "ai", "xmf");
 	public $bacModernDC = array("sww", "hq", "jus");
 	public $bacModernTMNT = array("hhs");
-	public $bacModernDnD = array("toa");
+	public $bacModernDnD = array("toa", "tiw");
     
 }

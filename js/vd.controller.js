@@ -65,18 +65,29 @@ myApp.controller("PackCtrl", ['$http', '$scope', '$location', '$window','$cookie
 				cardRainbowString +=cards[j]+";";
 		}
 		pp.rainbow = 'rainbow.php?cards='+cardRainbowString;
-	}
-	
-	function setPlayerNumber(number) {
-		if(pp.playerNumber != number){
-			pp.playerNumber = number;
-			
-			packString = draftPacks[number].substring(2);
+		if(pp.playerNumber != 0 && pp.packArray.length == 0){
+			packString = draftPacks[pp.playerNumber].substring(2);
 			pp.packArray = packString.split(";");
 			if(pp.packArray.length == 14 && pp.pickArray.length == 0){
 				pp.pickArray.push(pp.packArray[0]);
 				pp.pickArray.push(pp.packArray[1]);
 				pp.packArray.splice(0, 2);
+			}
+			$scope.$digest();
+		}
+	}
+	
+	function setPlayerNumber(number) {
+		if(pp.playerNumber != number){
+			pp.playerNumber = number;
+			if(draftPacks.length > 0){
+				packString = draftPacks[number].substring(2);
+				pp.packArray = packString.split(";");
+				if(pp.packArray.length == 14 && pp.pickArray.length == 0){
+					pp.pickArray.push(pp.packArray[0]);
+					pp.pickArray.push(pp.packArray[1]);
+					pp.packArray.splice(0, 2);
+				}
 			}
 			//$scope.$digest();
 		}
@@ -432,7 +443,7 @@ function initChatRoom(){
 
 
 	function createMemberElement(member) {
-	  const { name, color } = member.clientData;
+	  const { name, color } = typeof(member.clientData)=='undefined'?{red, red}: member.clientData;
 	  const el = document.createElement('div');
 	  el.appendChild(document.createTextNode(name));
 	  el.className = 'member';
