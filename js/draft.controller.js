@@ -4,12 +4,12 @@ var app = angular.module('draftApp', ["ui.checkbox"]);
 app.controller('DraftController', function() {
     var vm = this;
 
-    vm.sets= ["avx", "uxm",  "aou", "asm", "cw", "drs", "dp", "imw", "def","smc", "gotg", "xfc", "thor", "jll", "ki", "ai", "xmf","xfo","dxm", "jl", "wol", "wf", "gaf", "bat", "sww", "hq", "jus", "myst", "doom", "bff", "fus", "toa", "tiw", "aiw", "zhn", "tmnt", "hhs", "ygo", "bfu", "ork", "sw", "wwe", "bit", "tag"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.bacsets= ["avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "xmf", "jl", "wol", "wf", "sww", "hq", "jus", "bff", "fus",  "toa", "tiw", "tmnt", "hhs", "ygo", "bfu", "wwe"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.sets= ["avx", "uxm",  "aou", "asm", "cw", "drs", "dp", "imw", "def","smc", "gotg", "xfc", "thor", "jll", "ki", "ai", "xmf","xfo","dxm", "ig", "dps", "jl", "wol", "wf", "gaf", "bat", "sww", "hq", "jus", "myst", "doom", "bff", "fus", "toa", "tiw", "aiw", "zhn", "tmnt", "hhs", "ygo", "bfu", "ork", "sw", "wwe", "bit", "tag"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.bacsets= ["avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "xmf", "ig", "dps", "jl", "wol", "wf", "sww", "hq", "jus", "bff", "fus",  "toa", "tiw", "tmnt", "hhs", "ygo", "bfu", "wwe"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
     vm.starterSets= ["avx", "uxm", "jl", "ygo", "bff", "aou", "wol", "asm", "fus", "cw", "wf"];
-    vm.modernSets= ["ai", "xmf","xfo","dxm", "jll", "ki", "hq", "jus", "myst", "doom", "bfu", "ork", "sw", "wwe", "bit","tag", "tiw", "aiw", "zhn"];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.modernBacSets= ["ai", "hq", "bfu", "xmf", "jus", "tiw", "wwe"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
-    vm.marvel = ["avx", "uxm", "aou", "asm", "cw", "dp","gotg","xfc", "thor", "drs", "def", "smc", "imw", "ai", "jll", "ki", "xmf", "xfo", "dxm"];
+    vm.modernSets= ["ai", "xmf","xfo","dxm", "jll", "ki", "hq", "jus", "myst", "doom", "bfu", "ork", "sw", "wwe", "bit","tag", "tiw", "aiw", "zhn", "ig", "dps", ];//, "all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.modernBacSets= ["ai", "hq", "bfu", "xmf", "jus", "tiw", "wwe", "ig", "dps"];//,"all","allMarvel","allDC","allTMNT", "allDnD", "modern", "modernMarvel","modernDC","modernDnD"];
+    vm.marvel = ["avx", "uxm", "aou", "asm", "cw", "dp","gotg","xfc", "thor", "drs", "def", "smc", "imw", "ai", "jll", "ki", "xmf", "xfo", "dxm","ig", "dps"];
     vm.dc = ["jl", "wol", "wf", "gaf", "bat", "sww", "hq", "jus", "myst", "doom"];
     vm.tmnt = ["tmnt", "hhs"];
     vm.dnd = ["bff", "fus","toa", "tiw", "aiw", "zhn"];
@@ -183,4 +183,6 @@ app.controller('DraftController', function() {
 	vm.setNameDictionary['wwe'] = "WWE";
 	vm.setNameDictionary['bit'] = "WWE Bitter Rivals Team Pack";
 	vm.setNameDictionary['tag'] = "WWE Tag Teams Team Pack";
+	vm.setNameDictionary['ig'] = "Infinity Gauntlet";
+	vm.setNameDictionary['dps'] = "Dark Phoenix Saga";
 });

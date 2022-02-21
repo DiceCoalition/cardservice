@@ -8,6 +8,7 @@
 
 class setInfo
 {
+	//TODO:  Forgot to add Infinity Gauntlet
     public $setDictionaryCSI = array(
     "avx" => "Avengers%20vs%20X-Men" ,
     "uxm" => "The%20Uncanny%20X-men" ,
@@ -58,6 +59,8 @@ class setInfo
 	"xmf" => "XMF",
 	"xfo" => "XFO",
 	"dxm" => "DXM",
+	"ig" => "IG",
+	"dps" => "DPS",
 
     "jl" => "JL" ,
     "wol" => "WOL" ,
@@ -114,6 +117,7 @@ class setInfo
 	"dc_wkop2015" => "dc_wkop2015",
     "sk2017" => "sk2017",
     "wd2018" => "wd_op2018",
+	"null" => "null",
     );
 
     public $cardCount = array(
@@ -136,6 +140,8 @@ class setInfo
 		"xmf" => 72 ,
 		"xfo" => 24 ,
 		"dxm" => 24 ,
+		"ig" => 152,
+		"dps" => 152 ,
 
         "jl" => 138 ,
         "wol" => 142 ,
@@ -175,6 +181,8 @@ class setInfo
         "thor" => "1-12" ,
 		"ai" => "49-58" ,
 		"xmf" => "63-72" ,
+		"ig" => "1-16",
+		"dps" => "1-16" ,
 
         "jl" => "25-34" ,
         "wol" => "25-34" ,
@@ -214,6 +222,8 @@ class setInfo
 		"xmf" => "1-62",
 		"xfo" => "1-24",
 		"dxm" => "1-24",
+		"ig" => "17-56",
+		"dps" => "17-56",
 
         "jl" => "1-24,35-73" ,
         "wol" => "1-24,35-74" ,
@@ -253,6 +263,8 @@ class setInfo
         "gotg" => "41-80" ,
         "xfc" => "41-80" ,
         "thor" => "53-92" ,
+		"ig" => "57-96",
+		"dps" => "57-96",
 
         "jl" => "74-106" ,
         "wol" => "75-106" ,
@@ -276,6 +288,8 @@ class setInfo
         "gotg" => "81-116",
         "xfc" => "81-116" ,
         "thor" => "93-128" ,
+		"ig" => "97-136",
+		"dps" => "97-136",
 
         "jl" => "107-134" ,
         "wol" => "107-134" ,
@@ -299,6 +313,8 @@ class setInfo
         "gotg" => "117-124" ,
         "xfc" => "117-124" ,
         "thor" => "129-136" ,
+		"ig" => "137-152",
+		"dps" => "137-152",
 
         "jl" => "135-138" ,
         "wol" => "135-142" ,
@@ -312,23 +328,23 @@ class setInfo
         "ygo" => "107-110"
     );
 	
-	public $Marvel = array("avx", "uxm", "aou", "asm", "cw", "drs", "dp", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm");
+	public $Marvel = array("avx", "uxm", "aou", "asm", "cw", "drs", "dp", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm","ig","dps");
 	public $DC = array("jl", "wol", "wf", "gaf","bat", "sww", "hq", "jus", "doom", "myst");
 	public $TMNT = array("tmnt", "hhs");
 	public $DnD = array("bff", "fus", "toa", "tiw", "aiw", "zhn");
 	public $W4K = array("bfu", "ork", "sw");
 	public $WWE = array("wwe", "tag", "bit");
-	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "jus", "doom", "myst", "ai", "ki", "jll", "bfu", "ork", "sw", "xmf","xfo","dxm", "tiw", "aiw", "zhn", "wwe", "bit", "tag");
-	public $modernMarvel = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm");
+	public $modern = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "bat", "sww", "hhs", "toa", "hq", "jus", "doom", "myst", "ai", "ki", "jll", "bfu", "ork", "sw", "xmf","xfo","dxm", "tiw", "aiw", "zhn", "wwe", "bit", "tag", "ig", "dps");
+	public $modernMarvel = array("drs", "imw", "def", "smc", "gotg", "xfc", "thor", "ai", "ki", "jll", "xmf","xfo","dxm","ig","dps");
 	public $modernDC = array("bat", "sww", "hq", "jus", "doom", "myst");
 	public $modernTMNT = array("tmnt", "hhs");
 	public $modernDnD = array("toa", "tiw", "aiw", "zhn");
-	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "xmf");
+	public $bacMarvel = array("avx", "uxm", "aou", "asm", "cw", "imw", "thor", "ai", "xmf", "ig", "dps");
 	public $bacDC = array("jl", "wol", "wf", "sww", "hq");
 	public $bacTMNT = array("tmnt", "hhs");
 	public $bacDnD = array("bff", "fus", "toa", "tiw");
-	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu", "xmf", "tiw", "wwe");
-	public $bacModernMarvel = array("imw", "thor", "ai", "xmf");
+	public $bacModern = array("imw", "thor", "sww", "hhs", "toa", "ai", "hq", "bfu", "xmf", "tiw", "wwe", "ig", "dps");
+	public $bacModernMarvel = array("imw", "thor", "ai", "xmf", "ig", "dps");
 	public $bacModernDC = array("sww", "hq", "jus");
 	public $bacModernTMNT = array("hhs");
 	public $bacModernDnD = array("toa", "tiw");
