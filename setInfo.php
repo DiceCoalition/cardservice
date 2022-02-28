@@ -106,6 +106,7 @@ class setInfo
 	"d2016" => "dnd_op2016",
 	"d2015" => "dnd_op2015",
 	"bffop" => "dnd_op2015",
+	"bffpr" => "dnd_promo",
 	//trinity war double entry
 	"dctw" => "dctw",
 	"jlop" => "dctw",
